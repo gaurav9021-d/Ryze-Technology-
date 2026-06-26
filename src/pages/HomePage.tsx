@@ -38,6 +38,7 @@ import type { SEOMeta } from '@app-types';
 import { AnimatedCounter } from '@components/AnimatedCounter';
 import { AnimationWrapper } from '@components/AnimationWrapper';
 import { FeaturedWork } from '@components/FeaturedWork';
+import { ProcessTimeline } from '@components/ProcessTimeline';
 import { CapabilitiesShowcase } from '@components/CapabilitiesShowcase';
 import { CTA } from '@components/CTA';
 import { Hero } from '@components/Hero';
@@ -269,36 +270,8 @@ export function HomePage(): JSX.Element {
         </AnimationWrapper>
       </section>
 
-      {/* How we work — process band (added content). */}
-      <section
-        aria-label="How we work"
-        className="border-y border-ink-600 bg-ink-800"
-      >
-        <div className="mx-auto w-full max-w-site px-6 py-[clamp(6rem,14vh,11rem)] sm:px-10">
-          <SectionHeader eyebrow="How we work" title="A process you can see" />
-          <ol className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            {PROCESS_STEPS.map((step, index) => (
-              <li
-                key={step.title}
-                className="flex flex-col gap-4 border-t border-ink-600 pt-6"
-              >
-                <span
-                  aria-hidden="true"
-                  className="font-mono text-mono-eyebrow uppercase tracking-[0.2em] text-pulse-500"
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="font-display text-h3 font-semibold text-mist-100">
-                  {step.title}
-                </h3>
-                <p className="font-sans text-body text-mist-300">
-                  {step.detail}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      {/* How we work — process band with a scroll-drawn progress line. */}
+      <ProcessTimeline steps={PROCESS_STEPS} />
 
       {/* 6 — Why Us: AnimatedCounter metric row + differentiators (Req 6.3). */}
       <section
