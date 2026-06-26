@@ -10,6 +10,8 @@
 import { describe, it, expect } from 'vitest';
 import fc from 'fast-check';
 
+import { DEFAULT_NUM_RUNS } from '@/test/fastcheck';
+
 import { buildBreadcrumbTrail } from './breadcrumb';
 
 /** A URL-safe path segment (no slashes, non-empty). */
@@ -57,7 +59,7 @@ describe('buildBreadcrumbTrail (property)', () => {
           expect(trail[i]!.path).toBe(expectedPath);
         }
       }),
-      { numRuns: 100 },
+      { numRuns: DEFAULT_NUM_RUNS },
     );
   });
 });

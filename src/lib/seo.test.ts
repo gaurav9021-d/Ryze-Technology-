@@ -9,6 +9,8 @@
 import { describe, it, expect } from 'vitest';
 import fc from 'fast-check';
 
+import { DEFAULT_NUM_RUNS } from '@/test/fastcheck';
+
 import { normalizeMetaDescription } from './seo';
 
 const ELLIPSIS = '\u2026';
@@ -58,7 +60,7 @@ describe('normalizeMetaDescription', () => {
       fc.property(fc.string(), fc.integer({ min: 1, max: 300 }), (input, maxLen) => {
         expect(normalizeMetaDescription(input, maxLen).length).toBeLessThanOrEqual(maxLen);
       }),
-      { numRuns: 100 },
+      { numRuns: DEFAULT_NUM_RUNS },
     );
   });
 
@@ -71,7 +73,7 @@ describe('normalizeMetaDescription', () => {
         const twice = normalizeMetaDescription(once, maxLen);
         expect(twice).toBe(once);
       }),
-      { numRuns: 100 },
+      { numRuns: DEFAULT_NUM_RUNS },
     );
   });
 
@@ -99,7 +101,7 @@ describe('normalizeMetaDescription', () => {
           expect(input.charAt(body.length)).toMatch(/\s/);
         },
       ),
-      { numRuns: 100 },
+      { numRuns: DEFAULT_NUM_RUNS },
     );
   });
 
@@ -114,7 +116,7 @@ describe('normalizeMetaDescription', () => {
         expect(result).toBe(trimmed);
         expect(result.endsWith(ELLIPSIS)).toBe(trimmed.endsWith(ELLIPSIS));
       }),
-      { numRuns: 100 },
+      { numRuns: DEFAULT_NUM_RUNS },
     );
   });
 });

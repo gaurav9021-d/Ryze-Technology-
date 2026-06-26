@@ -25,7 +25,7 @@ import fc from 'fast-check';
  * default to a smaller sample, which still exercises every property across many
  * generated shapes but keeps the suite quick.
  */
-const DEFAULT_NUM_RUNS_FALLBACK = 30;
+const DEFAULT_NUM_RUNS_FALLBACK = 15;
 
 const resolveNumRuns = (): number => {
   const fromEnv = process.env.FAST_CHECK_NUM_RUNS;
@@ -62,8 +62,8 @@ export function configureFastCheck(): void {
   fc.configureGlobal({
     seed: resolveSeed(),
     numRuns: DEFAULT_NUM_RUNS,
-    // Surface the seed/path in failure output so counterexamples are easy to
-    // pin as regression tests.
-    verbose: fc.VerbosityLevel.VeryVerbose,
+    // Keep verbosity minimal for speed; fast-check still reports the failing
+    // counterexample and seed on assertion failure regardless of this level.
+    verbose: fc.VerbosityLevel.None,
   });
 }

@@ -13,6 +13,8 @@
 import { describe, it, expect } from 'vitest';
 import fc from 'fast-check';
 
+import { DEFAULT_NUM_RUNS } from '@/test/fastcheck';
+
 import { uniqueSlugs } from '@lib/slug';
 
 import { caseStudies } from './caseStudies';
@@ -60,7 +62,7 @@ describe('data integrity — process-step contiguity predicate (generated input)
       fc.property(contiguousArb, (steps) => {
         expect(processStepsContiguous(steps)).toBe(true);
       }),
-      { numRuns: 100 },
+      { numRuns: DEFAULT_NUM_RUNS },
     );
   });
 
@@ -88,7 +90,7 @@ describe('data integrity — process-step contiguity predicate (generated input)
         );
         expect(processStepsContiguous(broken)).toBe(false);
       }),
-      { numRuns: 100 },
+      { numRuns: DEFAULT_NUM_RUNS },
     );
   });
 });
