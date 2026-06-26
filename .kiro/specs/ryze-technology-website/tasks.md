@@ -195,7 +195,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Minimum 100 iterations for generated-input portions
     - _Requirements: 29.3, 29.4, 42.6_
 
-- [ ] 7. Global providers and hooks
+- [x] 7. Global providers and hooks
   - [x] 7.1 Implement ReducedMotionProvider and useReducedMotion
     - Read `matchMedia('(prefers-reduced-motion: reduce)')`, expose via context, update reactively on mid-session preference change
     - _Requirements: 37.1_
@@ -208,11 +208,11 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Instantiate Lenis only when motion is allowed; advance it from a single `gsap.ticker` loop; wire `ScrollTrigger.scrollerProxy` and drive `ScrollTrigger.update` from Lenis scroll events; under reduced motion skip Lenis and use native scroll; catch Lenis init failure and fall back to native scroll
     - _Requirements: 20.1, 20.2, 37.3, 42.5_
 
-  - [ ] 7.4 Implement useCounter
+  - [x] 7.4 Implement useCounter
     - Tween numeric value with easing + clamping; return target instantly under reduced motion; never emit a value outside [from, target]
     - _Requirements: 21.1, 21.2, 21.3, 37.2_
 
-  - [ ] 7.5 Implement useScrollAnimation and useMagnetic
+  - [x] 7.5 Implement useScrollAnimation and useMagnetic
     - `useScrollAnimation` registers a `gsap.context()`-scoped timeline/ScrollTrigger and auto-kills on unmount; `useMagnetic` returns pointer-follow motion values, no-op under reduced motion
     - _Requirements: 20.4, 23.1, 23.2_
 
@@ -224,16 +224,16 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Per-route `react-helmet-async` component setting title via template, normalized description (via `normalizeMetaDescription`), canonical, Open Graph, and `noIndex` support
     - _Requirements: 40.1, 40.2, 18.3, 40.5_
 
-  - [ ] 7.8 Implement PageTransition
+  - [x] 7.8 Implement PageTransition
     - Animate route enter/exit (Framer Motion); always scroll to top; move focus to new page `h1`/main wrapper; announce via `aria-live="polite"` Route_Announcer; under reduced motion perform instant cross-fade ≤ 120ms
     - _Requirements: 26.1, 26.2, 37.4, 38.3, 20.3_
 
-  - [ ]* 7.9 Write tests for providers and hooks
+  - [x]* 7.9 Write tests for providers and hooks
     - Reduced-motion: assert no Lenis instantiation, useCounter returns final value immediately, provider updates on preference change
     - useInView/useViewportCategory behavior with mocked observers/matchMedia
     - _Requirements: 37.1, 37.2, 37.3, 21.3_
 
-- [ ] 8. Checkpoint - providers and hooks
+- [x] 8. Checkpoint - providers and hooks
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 9. Animation utilities and motion primitives
