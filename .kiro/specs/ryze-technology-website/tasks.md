@@ -11,7 +11,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
 ## Tasks
 
 - [ ] 1. Project foundation and design system tokens
-  - [-] 1.1 Scaffold Vite + React + TypeScript project with strict config and aliases
+  - [x] 1.1 Scaffold Vite + React + TypeScript project with strict config and aliases
     - Initialize Vite React-TS app; install `react`, `react-dom`, `react-router-dom`, `tailwindcss`, `postcss`, `autoprefixer`
     - Enable strict `tsconfig` (strict, noUncheckedIndexedAccess, exactOptionalPropertyTypes) and configure path aliases (`@/`, `@components`, `@lib`, `@data`, `@hooks`, `@app-types` — avoid the reserved `@types` alias)
     - Configure Vite to resolve the same aliases; set up the base directory structure (`src/lib`, `src/data`, `src/hooks`, `src/components`, `src/providers`, `src/pages`, `src/app-types`)
