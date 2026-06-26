@@ -303,7 +303,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 13. Router and application shell
-  - [ ] 13.1 Implement router with lazy routes, Suspense, and per-route error boundaries
+  - [x] 13.1 Implement router with lazy routes, Suspense, and per-route error boundaries
     - Configure react-router-dom data router for `/`, `/portfolio`, `/portfolio/:slug`, `/services`, `/services/:slug`, `/about`, `/manifesto`, `/contact`, `/blog`, `/blog/:slug`, `/resources`, `/privacy`, `/terms`, `/cookies`, `*`; lazy-load each Page_Module wrapped in Suspense (branded skeleton) and a per-route error boundary
     - _Requirements: 5.1, 5.2, 18.1, 42.1, 42.2_
 
