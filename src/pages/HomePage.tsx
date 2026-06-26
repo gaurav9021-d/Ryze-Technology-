@@ -33,12 +33,11 @@
  *
  * _Requirements: 6.1, 6.2, 6.3, 6.4, 20.5, 40.1_
  */
-import { Link } from 'react-router-dom';
 import type { SEOMeta } from '@app-types';
 
 import { AnimatedCounter } from '@components/AnimatedCounter';
 import { AnimationWrapper } from '@components/AnimationWrapper';
-import { CaseStudyCard } from '@components/CaseStudyCard';
+import { FeaturedWork } from '@components/FeaturedWork';
 import { CapabilitiesShowcase } from '@components/CapabilitiesShowcase';
 import { CTA } from '@components/CTA';
 import { Hero } from '@components/Hero';
@@ -253,33 +252,7 @@ export function HomePage(): JSX.Element {
       <CapabilitiesShowcase services={services} />
 
       {/* 4 — Portfolio preview: featured case studies only (Requirement 6.2). */}
-      <section
-        aria-label="Featured work"
-        className="mx-auto w-full max-w-site px-6 py-[clamp(6rem,14vh,11rem)] sm:px-10"
-      >
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeader eyebrow="Selected work" title="Built to outlast" />
-          <Link
-            to="/portfolio"
-            data-cursor="link"
-            className="inline-flex min-h-[44px] items-center gap-2 font-mono text-sm tracking-wide text-pulse-500 transition-transform duration-200 ease-out hover:translate-x-1 focus-visible:translate-x-1"
-          >
-            View all work
-            <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-        <AnimationWrapper variant="rise" stagger={0.1}>
-          <div className="mt-12 grid gap-10 md:grid-cols-2">
-            {featuredCaseStudies.map((caseStudy, index) => (
-              <CaseStudyCard
-                key={caseStudy.slug}
-                caseStudy={caseStudy}
-                index={index}
-              />
-            ))}
-          </div>
-        </AnimationWrapper>
-      </section>
+      <FeaturedWork caseStudies={featuredCaseStudies} />
 
       {/* 5 — Services: the four service cards. */}
       <section
