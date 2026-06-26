@@ -311,7 +311,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Compose ReducedMotionProvider, SmoothScrollProvider, HelmetProvider, CustomCursor, Navigation, Footer, ErrorBoundary, and PageTransition around the router; refresh ScrollTrigger + scroll to top on route change; prefetch the next route chunk on nav-link hover/focus and via requestIdleCallback
     - _Requirements: 5.3, 5.4, 20.3, 26.2, 38.1_
 
-- [ ] 14. Pages
+- [x] 14. Pages
   - [x] 14.1 Implement HomePage
     - Render in order: Hero, Problems, Philosophy, Portfolio-preview (featured case studies), Services (4 cards), Why-Us (AnimatedCounter metrics), Team, CTA (MagneticButton → /contact), Footer; one heavy hero moment, lighter reveals elsewhere; SEOHead
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 20.5, 40.1_
@@ -368,7 +368,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Sections render; reduced motion → beliefs visible without pinning; jest-axe
     - _Requirements: 12.1, 12.2, 37.2, 38.1_
 
-  - [ ] 14.15 Implement ContactPage and Contact_Form
+  - [x] 14.15 Implement ContactPage and Contact_Form
     - Fields (name, email, company, project type, budget, timeline, message) with inline validation; status union idle/submitting/success/error; invalid → block submit, inline errors, `aria-invalid`, focus error summary; valid → submitting + POST to env `contactEndpoint`; 2xx → success, clear form, polite announce; failure/non-2xx/timeout → error, preserve values, retry control, announce, mailto fallback
     - _Requirements: 13.1, 13.2, 13.3, 13.4, 13.5, 13.6, 38.6_
 
@@ -392,15 +392,15 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Resolved post sections, 68ch measure, related posts, unknown slug → not-found; jest-axe
     - _Requirements: 15.1, 15.2, 15.3, 15.4, 38.1_
 
-  - [ ] 14.21 Implement ResourcesPage
+  - [x] 14.21 Implement ResourcesPage
     - When feature enabled, render grid of downloadable resource cards with file metadata and download links
     - _Requirements: 16.1_
 
-  - [ ] 14.22 Implement LegalPage
+  - [x] 14.22 Implement LegalPage
     - Param-driven template for `/privacy`, `/terms`, `/cookies`: Breadcrumb, long-form content, auto-generated TOC, last-updated label
     - _Requirements: 17.1_
 
-  - [ ] 14.23 Implement NotFoundPage
+  - [x] 14.23 Implement NotFoundPage
     - Oversized 404 with lazy interactive canvas (static under reduced motion), quick links to top routes, home/back action, `noIndex` metadata
     - _Requirements: 18.1, 18.2, 18.3, 40.5_
 
