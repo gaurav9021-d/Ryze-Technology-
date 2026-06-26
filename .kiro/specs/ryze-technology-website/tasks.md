@@ -171,12 +171,12 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
 - [x] 5. Checkpoint - pure logic layer
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. Typed static content and data modules
+- [x] 6. Typed static content and data modules
   - [x] 6.1 Author case studies and services data modules
     - Create `caseStudies.ts` and `services.ts` with realistic placeholder content conforming to the types; ensure unique slugs and contiguous 1..n process-step indices per service
     - _Requirements: 29.3, 29.4, 7.1, 9.1, 8.1, 10.1_
 
-  - [ ] 6.2 Author team and testimonials data modules
+  - [x] 6.2 Author team and testimonials data modules
     - Create `team.ts` (members with social links, order) and `testimonials.ts` (linked to case studies via `caseStudySlug`)
     - _Requirements: 11.2, 8.1_
 
@@ -200,11 +200,11 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Read `matchMedia('(prefers-reduced-motion: reduce)')`, expose via context, update reactively on mid-session preference change
     - _Requirements: 37.1_
 
-  - [ ] 7.2 Implement useViewportCategory and useInView
+  - [x] 7.2 Implement useViewportCategory and useInView
     - `useViewportCategory` reads width through `viewportCategory`; `useInView` wraps IntersectionObserver with threshold/rootMargin/once
     - _Requirements: 35.1, 2.1, 21.1, 25.1_
 
-  - [ ] 7.3 Implement SmoothScrollProvider and useLenis
+  - [x] 7.3 Implement SmoothScrollProvider and useLenis
     - Instantiate Lenis only when motion is allowed; advance it from a single `gsap.ticker` loop; wire `ScrollTrigger.scrollerProxy` and drive `ScrollTrigger.update` from Lenis scroll events; under reduced motion skip Lenis and use native scroll; catch Lenis init failure and fall back to native scroll
     - _Requirements: 20.1, 20.2, 37.3, 42.5_
 
@@ -220,7 +220,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Top-level error boundary plus a reusable per-route boundary that renders an error state with a retry control that re-imports the failed chunk
     - _Requirements: 42.1, 42.2_
 
-  - [ ] 7.7 Implement SEOHead
+  - [x] 7.7 Implement SEOHead
     - Per-route `react-helmet-async` component setting title via template, normalized description (via `normalizeMetaDescription`), canonical, Open Graph, and `noIndex` support
     - _Requirements: 40.1, 40.2, 18.3, 40.5_
 
