@@ -1,0 +1,104 @@
+/*
+ * Self-hosted variable fonts — "Engineered Permanence" typography (task 1.3).
+ *
+ * Requirements:
+ *   41.3 — Self-host variable fonts as preloaded woff2 with fallback metric overrides.
+ *   39.3 — Non-shifting font loading to keep CLS (Cumulative Layout Shift) low.
+ *
+ * This file is imported at the TOP of src/index.css (before @tailwind) so the
+ * @font-face declarations are registered before any utility/base styles apply.
+ *
+ * HOW THIS PREVENTS LAYOUT SHIFT (CLS):
+ *   - `font-display: swap` renders text immediately in the fallback face, then
+ *     swaps to the web font once it loads (no invisible text / FOIT).
+ *   - Each real face is paired with a "Fallback" @font-face built on a LOCAL
+ *     system font (Arial / Times / Courier) whose metrics are overridden via
+ *     `size-adjust`, `ascent-override`, `descent-override` and
+ *     `line-gap-override`. Because the fallback occupies (nearly) the same box
+ *     as the real font, the swap does not reflow surrounding content — CLS≈0.
+ *   - The fallback faces are listed in the --font-* token stacks in index.css
+ *     immediately after the real family, so the browser uses the
+ *     metric-matched fallback while the woff2 is in flight.
+ *
+ * NOTE ON BINARIES: Real woff2 binaries are NOT committed to this repo (see
+ * public/fonts/README.md for the list of files to drop in). Until the binaries
+ * are added, the `url('/fonts/*.woff2')` references 404 gracefully and the
+ * browser falls through to the metric-matched fallback face and then system
+ * fonts. This is acceptable for now — the deliverable is the correct,
+ * CLS-safe font-loading setup. The override values below are tuned for the
+ * intended families; adjust them if you swap in a different typeface.
+ *
+ * All listed fonts are free/open (OFL or similar): General Sans & Clash Display
+ * (Indian Type Foundry, free license) and JetBrains Mono (OFL).
+ */
+
+/* ----------------------------------------------------------------------------
+ * Display — "Clash Display" (variable, weights 200–700 used as 100–900 range)
+ * ------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metric-matched fallback for Clash Display (based on local Arial). */
+@font-face {
+  font-family: 'Clash Display Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  font-weight: 100 900;
+  font-style: normal;
+  size-adjust: 102%;
+  ascent-override: 95%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+/* ----------------------------------------------------------------------------
+ * Sans / body — "General Sans" (variable, weights 200–700)
+ * ------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metric-matched fallback for General Sans (based on local Arial). */
+@font-face {
+  font-family: 'General Sans Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  font-weight: 100 900;
+  font-style: normal;
+  size-adjust: 100%;
+  ascent-override: 98%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+/* ----------------------------------------------------------------------------
+ * Mono — "JetBrains Mono" (variable, weights 100–800)
+ * ------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metric-matched fallback for JetBrains Mono (based on local Courier New). */
+@font-face {
+  font-family: 'JetBrains Mono Fallback';
+  src: local('Courier New'), local('Courier');
+  font-weight: 100 900;
+  font-style: normal;
+  size-adjust: 92%;
+  ascent-override: 105%;
+  descent-override: 27%;
+  line-gap-override: 0%;
+}

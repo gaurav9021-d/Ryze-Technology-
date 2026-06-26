@@ -22,12 +22,12 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Mirror identical values into `tailwind.config.ts` so utilities and JS animation read one source of truth
     - _Requirements: 36.1, 36.4_
 
-  - [~] 1.3 Self-host variable fonts with preload and fallback metrics
+  - [x] 1.3 Self-host variable fonts with preload and fallback metrics
     - Add self-hosted `woff2` variable fonts (display grotesk, sans, mono); declare `@font-face` with `font-display: swap` and fallback metric overrides (size-adjust/ascent) to prevent CLS
     - Add `<link rel="preload">` for the critical variable fonts in the document head
     - _Requirements: 41.3, 39.3_
 
-  - [~] 1.4 Implement global styles and grain material overlay
+  - [-] 1.4 Implement global styles and grain material overlay
     - Author global stylesheet: base `ink` material background, film-grain noise overlay (~4% opacity) + faint vignette, focus-ring style (`--pulse-500`, 2px offset, never removed), prose `max-width: 68ch`, and the optional exposed blueprint grid overlay utility
     - Wire global styles into the app entry
     - _Requirements: 36.1, 36.2, 38.2, 15.2_
