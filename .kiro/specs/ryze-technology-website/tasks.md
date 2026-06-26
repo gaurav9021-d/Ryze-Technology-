@@ -10,7 +10,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
 
 ## Tasks
 
-- [ ] 1. Project foundation and design system tokens
+- [x] 1. Project foundation and design system tokens
   - [x] 1.1 Scaffold Vite + React + TypeScript project with strict config and aliases
     - Initialize Vite React-TS app; install `react`, `react-dom`, `react-router-dom`, `tailwindcss`, `postcss`, `autoprefixer`
     - Enable strict `tsconfig` (strict, noUncheckedIndexedAccess, exactOptionalPropertyTypes) and configure path aliases (`@/`, `@components`, `@lib`, `@data`, `@hooks`, `@app-types` — avoid the reserved `@types` alias)
@@ -27,7 +27,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Add `<link rel="preload">` for the critical variable fonts in the document head
     - _Requirements: 41.3, 39.3_
 
-  - [-] 1.4 Implement global styles and grain material overlay
+  - [x] 1.4 Implement global styles and grain material overlay
     - Author global stylesheet: base `ink` material background, film-grain noise overlay (~4% opacity) + faint vignette, focus-ring style (`--pulse-500`, 2px offset, never removed), prose `max-width: 68ch`, and the optional exposed blueprint grid overlay utility
     - Wire global styles into the app entry
     - _Requirements: 36.1, 36.2, 38.2, 15.2_
