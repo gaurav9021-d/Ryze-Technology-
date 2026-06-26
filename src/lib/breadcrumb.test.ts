@@ -38,7 +38,7 @@ describe('buildBreadcrumbTrail (property)', () => {
         // Starts at Home. (Requirement 3.2)
         // Generated label-map keys never include the root key '/', so Home
         // keeps its default label here.
-        expect(trail[0].label).toBe('Home');
+        expect(trail[0]!.label).toBe('Home');
 
         // Only the last item omits `path`; all others have one. (Requirement 3.3)
         trail.forEach((item, index) => {
@@ -54,7 +54,7 @@ describe('buildBreadcrumbTrail (property)', () => {
         // (Requirement 3.2)
         for (let i = 1; i < trail.length - 1; i++) {
           const expectedPath = `/${segments.slice(0, i).join('/')}`;
-          expect(trail[i].path).toBe(expectedPath);
+          expect(trail[i]!.path).toBe(expectedPath);
         }
       }),
       { numRuns: 100 },

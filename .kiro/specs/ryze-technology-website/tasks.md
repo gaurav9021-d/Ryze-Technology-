@@ -172,7 +172,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 6. Typed static content and data modules
-  - [ ] 6.1 Author case studies and services data modules
+  - [x] 6.1 Author case studies and services data modules
     - Create `caseStudies.ts` and `services.ts` with realistic placeholder content conforming to the types; ensure unique slugs and contiguous 1..n process-step indices per service
     - _Requirements: 29.3, 29.4, 7.1, 9.1, 8.1, 10.1_
 
@@ -180,11 +180,11 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - Create `team.ts` (members with social links, order) and `testimonials.ts` (linked to case studies via `caseStudySlug`)
     - _Requirements: 11.2, 8.1_
 
-  - [ ] 6.3 Author blog posts data module
+  - [x] 6.3 Author blog posts data module
     - Create `blogPosts.ts` with categories, excerpts, authors, content, and `readingTimeMinutes` precomputed via `computeReadingTime`; unique slugs
     - _Requirements: 14.1, 15.1, 29.3_
 
-  - [ ] 6.4 Author navigation and site metadata modules
+  - [x] 6.4 Author navigation and site metadata modules
     - Create `navigation.ts` (Work/Services/About dropdown parents + Contact CTA item) and `siteMetadata.ts` (titleTemplate, baseUrl, default OG, social, contactEmail, env-injected `contactEndpoint`)
     - _Requirements: 1.2, 4.2, 13.3, 40.1, 41.2_
 
@@ -196,7 +196,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - _Requirements: 29.3, 29.4, 42.6_
 
 - [ ] 7. Global providers and hooks
-  - [ ] 7.1 Implement ReducedMotionProvider and useReducedMotion
+  - [x] 7.1 Implement ReducedMotionProvider and useReducedMotion
     - Read `matchMedia('(prefers-reduced-motion: reduce)')`, expose via context, update reactively on mid-session preference change
     - _Requirements: 37.1_
 
@@ -216,7 +216,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - `useScrollAnimation` registers a `gsap.context()`-scoped timeline/ScrollTrigger and auto-kills on unmount; `useMagnetic` returns pointer-follow motion values, no-op under reduced motion
     - _Requirements: 20.4, 23.1, 23.2_
 
-  - [ ] 7.6 Implement ErrorBoundary
+  - [x] 7.6 Implement ErrorBoundary
     - Top-level error boundary plus a reusable per-route boundary that renders an error state with a retry control that re-imports the failed chunk
     - _Requirements: 42.1, 42.2_
 

@@ -144,7 +144,7 @@ describe('filterCaseStudies', () => {
         fc.constantFrom<'all' | PortfolioCategory>('all', ...PORTFOLIO_CATEGORIES),
         (items, category) => {
           const result = filterCaseStudies(items, category);
-          const indices = result.map((item) => item.__idx);
+          const indices = result.map((item) => (item as TaggedCaseStudy).__idx);
           const sorted = [...indices].sort((a, b) => a - b);
           expect(indices).toEqual(sorted);
         },
@@ -157,7 +157,7 @@ describe('filterCaseStudies', () => {
   it('partitions all items across the concrete categories exactly once', () => {
     fc.assert(
       fc.property(caseStudiesArb, (items) => {
-        const seen = new Set<TaggedCaseStudy>();
+        const seen = new Set<CaseStudy>();
         let total = 0;
         for (const category of PORTFOLIO_CATEGORIES) {
           for (const item of filterCaseStudies(items, category)) {
@@ -197,7 +197,7 @@ describe('getCaseStudiesByService', () => {
           }
         }
         // Order stability.
-        const indices = result.map((item) => item.__idx);
+        const indices = result.map((item) => (item as TaggedCaseStudy).__idx);
         expect(indices).toEqual([...indices].sort((a, b) => a - b));
       }),
     );
@@ -221,7 +221,7 @@ describe('filterPostsByCategory', () => {
           }
 
           // P22 order stability.
-          const indices = result.map((post) => post.__idx);
+          const indices = result.map((post) => (post as TaggedBlogPost).__idx);
           expect(indices).toEqual([...indices].sort((a, b) => a - b));
 
           if (category === 'all') {
@@ -247,7 +247,7 @@ describe('filterPostsByCategory', () => {
     // P23 partition completeness for blog posts.
     fc.assert(
       fc.property(blogPostsArb, (posts) => {
-        const seen = new Set<TaggedBlogPost>();
+        const seen = new Set<BlogPost>();
         let total = 0;
         for (const category of BLOG_CATEGORIES) {
           for (const post of filterPostsByCategory(posts, category)) {

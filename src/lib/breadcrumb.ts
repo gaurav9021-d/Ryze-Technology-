@@ -73,7 +73,8 @@ export function buildBreadcrumbTrail(
   }
 
   // The last item is the current page: strip its `path` (Requirement 3.3).
-  const last = trail[trail.length - 1];
+  // `trail` always has at least the Home entry, so the last index is defined.
+  const last = trail[trail.length - 1]!;
   trail[trail.length - 1] = { label: last.label };
 
   return trail;

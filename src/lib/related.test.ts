@@ -82,7 +82,7 @@ function scenarioArb<T extends { slug: string }>(
             const items = list.map((e, i) =>
               i === currentIndex ? { ...e, relatedSlugs } : e,
             );
-            return { items, current: items[currentIndex], limit };
+            return { items, current: items[currentIndex]!, limit };
           });
         }),
     );
