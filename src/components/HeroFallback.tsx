@@ -66,21 +66,21 @@ export function HeroFallback({ poster }: HeroFallbackProps): JSX.Element {
         />
       ) : null}
 
-      {/* Gradient-mesh glows — layered radial gradients in the pulse accent. */}
+      {/* Gradient-mesh glows — soft electric-indigo blooms on the paper base. */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: [
-            'radial-gradient(60% 50% at 18% 22%, rgba(34, 211, 238, 0.20), transparent 70%)',
-            'radial-gradient(55% 45% at 82% 30%, rgba(14, 116, 144, 0.22), transparent 72%)',
-            'radial-gradient(70% 60% at 50% 96%, rgba(92, 224, 242, 0.12), transparent 75%)',
+            'radial-gradient(60% 50% at 18% 22%, rgba(43, 39, 255, 0.14), transparent 70%)',
+            'radial-gradient(55% 45% at 82% 30%, rgba(79, 76, 255, 0.12), transparent 72%)',
+            'radial-gradient(70% 60% at 50% 96%, rgba(43, 39, 255, 0.08), transparent 75%)',
           ].join(', '),
         }}
       />
 
-      {/* Blueprint grid accents — faint fine + coarse line grid. */}
+      {/* Blueprint grid accents — faint fine + coarse line grid (ink hairlines). */}
       <div
-        className="absolute inset-0 opacity-[0.06]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage: [
             'linear-gradient(to right, var(--mist-100) 1px, transparent 1px)',
@@ -97,16 +97,16 @@ export function HeroFallback({ poster }: HeroFallbackProps): JSX.Element {
 
       {/* Grain texture for tactile depth over the flat gradients. */}
       <div
-        className="absolute inset-0 opacity-[0.12] mix-blend-overlay"
+        className="absolute inset-0 opacity-[0.08] mix-blend-multiply"
         style={{ backgroundImage: GRAIN_DATA_URI }}
       />
 
-      {/* Bottom vignette so composed text keeps contrast against the mesh. */}
+      {/* Bottom fade to paper so composed text settles into the page below. */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage:
-            'linear-gradient(to bottom, transparent 40%, rgba(7, 10, 18, 0.65) 100%)',
+            'linear-gradient(to bottom, transparent 45%, rgba(243, 241, 234, 0.85) 100%)',
         }}
       />
     </div>

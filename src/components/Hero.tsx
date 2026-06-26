@@ -125,7 +125,7 @@ export function Hero({ headline, eyebrow }: HeroProps): JSX.Element {
 
   return (
     <section
-      className="relative flex min-h-[90vh] w-full items-center overflow-hidden bg-ink-900"
+      className="relative flex min-h-screen w-full items-center overflow-hidden bg-ink-900"
       aria-label="Intro"
     >
       {/* Background layers live inside the observed ref. */}
@@ -146,33 +146,71 @@ export function Hero({ headline, eyebrow }: HeroProps): JSX.Element {
             </Suspense>
           </div>
         ) : null}
+
+        {/* Living aurora energy field — atmosphere over the base layers. */}
+        <div className="aurora" aria-hidden="true" />
+        {/* Exposed blueprint grid hairlines for the "engineered" motif. */}
+        <div className="grid-overlay absolute inset-0" aria-hidden="true" />
+        {/* Bottom fade so the hero settles into the page below. */}
+        <div
+          className="absolute inset-x-0 bottom-0 z-[1] h-40 bg-gradient-to-b from-transparent to-ink-900"
+          aria-hidden="true"
+        />
       </div>
 
       {/* Composed hero content on top of whichever background is active. */}
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-24 sm:px-8">
-        {eyebrow !== undefined && eyebrow.length > 0 ? (
-          <p className="mb-6 font-mono text-sm uppercase tracking-[0.2em] text-pulse-500">
-            {eyebrow}
-          </p>
-        ) : null}
+      <div className="relative z-10 mx-auto w-full max-w-site px-6 pb-28 pt-32 sm:px-10">
+        {/* Kinetic eyebrow row: live status dot + label + coordinate. */}
+        <div className="mb-10 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-mist-300">
+          <span className="inline-flex items-center gap-2 text-pulse-500">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pulse-500 opacity-70" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-pulse-500" />
+            </span>
+            {eyebrow !== undefined && eyebrow.length > 0 ? eyebrow : 'Ryze Technology'}
+          </span>
+          <span aria-hidden="true" className="hidden h-px w-12 bg-ink-600 sm:block" />
+          <span className="hidden sm:inline">Software studio · Nagpur, IN</span>
+          <span aria-hidden="true" className="hidden h-px w-12 bg-ink-600 lg:block" />
+          <span className="hidden lg:inline">21.15°N&nbsp;79.09°E</span>
+        </div>
 
+        {/* Oversized, constructed display headline. */}
         <SplitText
           as="h1"
           by="word"
           text={headline}
           trigger="mount"
-          className="max-w-4xl text-balance text-5xl font-semibold leading-[1.02] tracking-tight text-mist-100 sm:text-6xl md:text-7xl lg:text-8xl"
+          className="max-w-[16ch] font-display text-[clamp(3rem,9.5vw,9.5rem)] font-semibold leading-[0.92] tracking-[-0.03em] text-mist-100"
         />
 
-        <p className="mt-8 max-w-2xl text-lg leading-relaxed text-mist-300 md:text-xl">
-          {SUBHEADLINE}
-        </p>
+        <div className="mt-10 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <p className="max-w-xl font-sans text-body-l leading-relaxed text-mist-300">
+            {SUBHEADLINE}
+          </p>
 
-        <div className="mt-10">
-          <MagneticButton as="a" href="/contact" ariaLabel="Start a project">
-            Start a project
-          </MagneticButton>
+          <div className="flex flex-shrink-0 items-center gap-8">
+            <MagneticButton as="a" href="/contact" ariaLabel="Start a project">
+              Start a project
+            </MagneticButton>
+            <a
+              href="/portfolio"
+              data-cursor="link"
+              className="group inline-flex items-center gap-2 font-mono text-mono-eyebrow uppercase tracking-[0.2em] text-mist-100 transition-colors duration-200 ease-out hover:text-pulse-500 focus-visible:text-pulse-500"
+            >
+              See our work
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </a>
+          </div>
         </div>
+
+        {/* Hairline rule anchoring the hero to the grid. */}
+        <div className="rule-pulse mt-16 w-full" aria-hidden="true" />
       </div>
 
       {/* Scroll affordance pinned to the bottom of the hero. */}

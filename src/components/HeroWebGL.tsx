@@ -114,14 +114,15 @@ function PointField({
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const material = new THREE.PointsMaterial({
-      // Pulse cyan from the design token palette.
-      color: new THREE.Color('#22d3ee'),
-      size: 0.035,
+      // Electric indigo accent — visible as crisp marks on the light paper base.
+      color: new THREE.Color('#2b27ff'),
+      size: 0.03,
       sizeAttenuation: true,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.9,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      // Normal blending (NOT additive): additive is invisible on a light bg.
+      blending: THREE.NormalBlending,
     });
 
     return { geometry, material, start, target, positions };
