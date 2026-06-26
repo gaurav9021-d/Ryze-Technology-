@@ -339,12 +339,12 @@ export function Navigation({
     <header
       className={[
         'sticky top-0 z-50 w-full transition-colors duration-300',
-        solid ? 'bg-[#e7e4db]/80 backdrop-blur-md border-b border-ink-600 shadow-[0_1px_12px_-6px_rgba(10,10,8,0.45)]' : 'bg-transparent',
+        solid ? 'bg-[#cdcabf]/90 backdrop-blur-md border-b border-ink-600 shadow-[0_1px_14px_-6px_rgba(10,10,8,0.5)]' : 'bg-transparent',
       ].join(' ')}
     >
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2"
+        className="mx-auto flex max-w-7xl items-center justify-between px-6 py-1.5"
       >
         <Link
           to="/"

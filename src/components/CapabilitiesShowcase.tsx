@@ -107,34 +107,45 @@ export function CapabilitiesShowcase({
       aria-label="What we build"
       className="relative overflow-hidden bg-ink-900"
     >
-      <div className="px-6 pt-[clamp(4rem,8vh,6rem)] sm:px-10">
-        <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
-          What we build
-        </p>
-        <h2 className="mt-5 max-w-[16ch] font-display text-[clamp(2rem,5vw,4rem)] font-bold leading-[0.98] tracking-[-0.02em] text-mist-100">
-          Four disciplines, one standard.
-        </h2>
-      </div>
-
       {reducedMotion ? (
         // Reduced motion: static, fully-visible responsive grid (no pin/scrub).
-        <div className="grid w-full gap-6 px-6 py-12 sm:grid-cols-2 sm:px-10 lg:grid-cols-4">
-          {services.map((service, index) => (
-            <Panel key={service.slug} service={service} index={index} />
-          ))}
-        </div>
-      ) : (
-        // Motion: a horizontal track, vertically centered in the pinned viewport.
-        <div className="flex min-h-[78vh] items-center">
-          <div
-            data-track=""
-            className="flex gap-6 px-6 will-change-transform sm:gap-8 sm:px-10"
-          >
+        <div className="px-6 py-[clamp(4rem,10vh,7rem)] sm:px-10">
+          <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
+            What we build
+          </p>
+          <h2 className="mt-5 max-w-[16ch] font-display text-[clamp(2rem,5vw,4rem)] font-bold leading-[0.98] tracking-[-0.02em] text-mist-100">
+            Four disciplines, one standard.
+          </h2>
+          <div className="mt-12 grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((service, index) => (
               <Panel key={service.slug} service={service} index={index} />
             ))}
-            {/* Trailing spacer so the last panel can rest fully in view. */}
-            <div aria-hidden="true" className="w-[6vw] shrink-0" />
+          </div>
+        </div>
+      ) : (
+        // Motion: a full-viewport pinned layout — compact heading on top, the
+        // horizontal track vertically centered in the remaining space so the
+        // cards always fit on screen (no clipped chips).
+        <div className="flex h-screen flex-col">
+          <div className="shrink-0 px-6 pt-[clamp(4.5rem,8vh,6rem)] sm:px-10">
+            <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
+              What we build
+            </p>
+            <h2 className="mt-3 max-w-[16ch] font-display text-[clamp(1.75rem,3.6vw,3rem)] font-bold leading-[1] tracking-[-0.02em] text-mist-100">
+              Four disciplines, one standard.
+            </h2>
+          </div>
+          <div className="flex min-h-0 flex-1 items-center pb-8">
+            <div
+              data-track=""
+              className="flex gap-6 px-6 will-change-transform sm:gap-8 sm:px-10"
+            >
+              {services.map((service, index) => (
+                <Panel key={service.slug} service={service} index={index} />
+              ))}
+              {/* Trailing spacer so the last panel can rest fully in view. */}
+              <div aria-hidden="true" className="w-[6vw] shrink-0" />
+            </div>
           </div>
         </div>
       )}
