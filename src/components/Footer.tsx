@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 import { Logo } from './Logo';
 import { siteMetadata } from '@data/siteMetadata';
-import { footerNav, footerLegalLinks } from '@data/navigation';
+import { footerLegalLinks } from '@data/navigation';
 import type { SiteMetadata, SocialLink } from '@app-types';
 
 export interface FooterProps {
@@ -47,56 +47,33 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
   return (
     <footer
       role="contentinfo"
-      className="border-t border-ink-700 bg-ink-900 text-mist-300"
+      className="border-t border-ink-600 bg-ink-900 text-mist-300"
     >
-      <div className="mx-auto w-full max-w-7xl px-6 py-16">
-        <div className="grid gap-12 md:grid-cols-[1.5fr_repeat(auto-fit,minmax(8rem,1fr))]">
-          {/* Brand + tagline */}
-          <div>
-            <Link
-              to="/"
-              aria-label="Ryze Technology home"
-              className="inline-flex transition-opacity hover:opacity-80 focus-visible:opacity-80"
-            >
-              <Logo variant="full" height={40} />
-            </Link>
-            <p className="mt-4 max-w-xs text-sm text-mist-300">
-              {metadata.defaultDescription}
-            </p>
-          </div>
-
-          {/* Site link groups */}
-          {footerNav.map((group) => (
-            <nav key={group.title} aria-label={group.title}>
-              <h2 className="font-mono text-xs uppercase tracking-widest text-mist-100">
-                {group.title}
-              </h2>
-              <ul className="mt-4 space-y-2">
-                {group.links.map((link) => (
-                  <li key={`${group.title}-${link.label}-${link.path}`}>
-                    <Link
-                      to={link.path}
-                      className="text-sm text-mist-300 transition-colors hover:text-pulse-500"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 py-8 md:flex-row md:items-center md:justify-between">
+        {/* Brand + copyright */}
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <Link
+            to="/"
+            aria-label="Ryze Technology home"
+            className="inline-flex transition-opacity hover:opacity-80 focus-visible:opacity-80"
+          >
+            <Logo variant="full" height={24} />
+          </Link>
+          <p className="font-mono text-xs text-mist-300">
+            © {year} {metadata.siteName}
+          </p>
         </div>
 
-        {/* Social + contact email */}
-        <div className="mt-12 flex flex-col gap-6 border-t border-ink-700 pt-8 md:flex-row md:items-center md:justify-between">
-          <ul className="flex flex-wrap gap-6" aria-label="Social media">
+        {/* Social + email + legal */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <ul className="flex flex-wrap gap-5" aria-label="Social media">
             {metadata.social.map((link) => (
               <li key={link.platform}>
                 <a
                   href={socialHref(link)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-sm text-mist-300 transition-colors hover:text-pulse-500"
+                  className="font-mono text-xs text-mist-300 transition-colors hover:text-pulse-500"
                 >
                   {SOCIAL_LABELS[link.platform]}
                 </a>
@@ -106,23 +83,17 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
 
           <a
             href={`mailto:${metadata.contactEmail}`}
-            className="font-mono text-sm text-mist-100 transition-colors hover:text-pulse-500"
+            className="font-mono text-xs text-mist-100 transition-colors hover:text-pulse-500"
           >
             {metadata.contactEmail}
           </a>
-        </div>
 
-        {/* Legal links + copyright */}
-        <div className="mt-8 flex flex-col gap-4 text-xs text-mist-300 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {year} {metadata.siteName}. All rights reserved.
-          </p>
-          <ul className="flex flex-wrap gap-6" aria-label="Legal">
+          <ul className="flex flex-wrap gap-5" aria-label="Legal">
             {footerLegalLinks.map((link) => (
               <li key={link.path}>
                 <Link
                   to={link.path}
-                  className="transition-colors hover:text-pulse-500"
+                  className="font-mono text-xs text-mist-300 transition-colors hover:text-pulse-500"
                 >
                   {link.label}
                 </Link>
