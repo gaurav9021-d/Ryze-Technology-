@@ -71,9 +71,9 @@ export function HeroFallback({ poster }: HeroFallbackProps): JSX.Element {
         className="absolute inset-0"
         style={{
           backgroundImage: [
-            'radial-gradient(60% 50% at 18% 22%, rgba(43, 39, 255, 0.14), transparent 70%)',
-            'radial-gradient(55% 45% at 82% 30%, rgba(79, 76, 255, 0.12), transparent 72%)',
-            'radial-gradient(70% 60% at 50% 96%, rgba(43, 39, 255, 0.08), transparent 75%)',
+            'radial-gradient(60% 50% at 18% 22%, rgba(33, 86, 201, 0.14), transparent 70%)',
+            'radial-gradient(55% 45% at 82% 30%, rgba(58, 111, 224, 0.12), transparent 72%)',
+            'radial-gradient(70% 60% at 50% 96%, rgba(33, 86, 201, 0.08), transparent 75%)',
           ].join(', '),
         }}
       />

@@ -94,7 +94,7 @@ describe('design token contrast pairings (Requirement 36.2)', () => {
     expect(ink900).toBe('#f3f1ea');
     expect(mist100).toBe('#0a0a08');
     expect(mist300).toBe('#54524a');
-    expect(pulse500).toBe('#2b27ff');
+    expect(pulse500).toBe('#2156c9');
   });
 
   it('mirrors the same tokens in tailwind.config.ts via var() references', () => {

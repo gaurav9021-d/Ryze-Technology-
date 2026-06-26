@@ -114,8 +114,8 @@ function PointField({
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const material = new THREE.PointsMaterial({
-      // Electric indigo accent — visible as crisp marks on the light paper base.
-      color: new THREE.Color('#2b27ff'),
+      // Ryze brand cobalt — visible as crisp marks on the light paper base.
+      color: new THREE.Color('#2156c9'),
       size: 0.03,
       sizeAttenuation: true,
       transparent: true,

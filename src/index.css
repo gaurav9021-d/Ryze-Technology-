@@ -26,10 +26,10 @@
   --mist-300: #54524a; /* secondary text (AA on paper) */
   --mist-100: #0a0a08; /* primary text — near-black */
 
-  /* Color — pulse (electric accent on light) */
-  --pulse-500: #2b27ff; /* primary energy/accent — electric indigo */
-  --pulse-400: #4f4cff; /* hover/glow */
-  --pulse-700: #1a17b8; /* deep (links, focus rings) */
+  /* Color — pulse (Ryze brand blue on light) */
+  --pulse-500: #2156c9; /* primary accent — brand cobalt (AA on paper) */
+  --pulse-400: #3a6fe0; /* brighter brand blue — hover / gradient */
+  --pulse-700: #163e96; /* deep brand blue — links, focus rings */
 
   /* Color — signal accents */
   --ember-500: #ff4d1f; /* warm signal accent (sparing) */
@@ -304,10 +304,10 @@ body::before {
   filter: blur(80px);
   opacity: 0.4;
   background:
-    radial-gradient(38% 50% at 22% 30%, rgba(43, 39, 255, 0.28), transparent 70%),
-    radial-gradient(34% 46% at 80% 26%, rgba(79, 76, 255, 0.22), transparent 72%),
-    radial-gradient(42% 54% at 62% 80%, rgba(43, 39, 255, 0.16), transparent 70%),
-    radial-gradient(28% 40% at 30% 84%, rgba(255, 77, 31, 0.12), transparent 72%);
+    radial-gradient(38% 50% at 22% 30%, rgba(33, 86, 201, 0.26), transparent 70%),
+    radial-gradient(34% 46% at 80% 26%, rgba(58, 111, 224, 0.22), transparent 72%),
+    radial-gradient(42% 54% at 62% 80%, rgba(33, 86, 201, 0.16), transparent 70%),
+    radial-gradient(28% 40% at 30% 84%, rgba(91, 147, 240, 0.16), transparent 72%);
   animation: aurora-drift 22s var(--ease-in-out-quint) infinite alternate;
 }
 

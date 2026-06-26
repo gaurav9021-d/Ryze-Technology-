@@ -14,6 +14,7 @@
  */
 import { Link } from 'react-router-dom';
 
+import { Logo } from './Logo';
 import { siteMetadata } from '@data/siteMetadata';
 import { footerNav, footerLegalLinks } from '@data/navigation';
 import type { SiteMetadata, SocialLink } from '@app-types';
@@ -54,9 +55,10 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
           <div>
             <Link
               to="/"
-              className="font-display text-2xl tracking-tight text-mist-100"
+              aria-label="Ryze Technology home"
+              className="inline-flex transition-opacity hover:opacity-80 focus-visible:opacity-80"
             >
-              {metadata.siteName}
+              <Logo variant="full" height={40} />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-mist-300">
               {metadata.defaultDescription}

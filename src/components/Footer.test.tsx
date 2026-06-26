@@ -31,9 +31,10 @@ describe('Footer', () => {
   it('renders the company name', () => {
     renderFooter();
     const footer = screen.getByRole('contentinfo');
+    // The brand lockup is the Logo, exposed via the home link's accessible name.
     expect(
-      within(footer).getAllByText(siteMetadata.siteName).length,
-    ).toBeGreaterThan(0);
+      within(footer).getByRole('link', { name: /ryze technology home/i }),
+    ).toBeInTheDocument();
   });
 
   it('renders a copyright line with the current year', () => {

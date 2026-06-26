@@ -38,6 +38,7 @@ import { navItems as defaultNavItems } from '@data/navigation';
 import type { NavChild, NavItem } from '@app-types';
 import { useViewportCategory } from '@hooks/useViewportCategory';
 import { MagneticButton } from './MagneticButton';
+import { Logo } from './Logo';
 
 export interface NavigationProps {
   /** Nav items to render. Defaults to the Data_Layer `navItems`. */
@@ -349,9 +350,9 @@ export function Navigation({
           to="/"
           data-cursor="link"
           aria-label="Ryze Technology home"
-          className="font-display text-lg font-semibold tracking-tight text-mist-100 transition-colors hover:text-pulse-500 focus-visible:text-pulse-500"
+          className="transition-opacity hover:opacity-80 focus-visible:opacity-80"
         >
-          Ryze
+          <Logo variant="full" height={34} />
         </Link>
 
         {isMobile ? (
