@@ -21,6 +21,7 @@ import type { Service } from '@app-types';
 import type { RefObject } from 'react';
 import { useReducedMotion } from '@hooks/useReducedMotion';
 import { useScrollAnimation } from '@hooks/useScrollAnimation';
+import { CapabilityScene, type CapabilityKind } from './CapabilityScene';
 
 export interface CapabilitiesShowcaseProps {
   /** The capabilities to walk through (typically the four services). */
@@ -44,6 +45,11 @@ function Panel({ service, index }: { service: Service; index: number }): JSX.Ele
         <span className="mt-3 font-mono text-mono-eyebrow uppercase tracking-[0.2em] text-pulse-500">
           Capability
         </span>
+      </div>
+
+      {/* Animated illustration of this discipline in action. */}
+      <div className="rounded-xl border border-ink-600 bg-ink-900 p-4">
+        <CapabilityScene kind={service.slug as CapabilityKind} />
       </div>
 
       <div className="flex flex-col gap-5">
