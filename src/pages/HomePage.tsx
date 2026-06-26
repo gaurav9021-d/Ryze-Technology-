@@ -51,7 +51,32 @@ import { SEOHead } from '@components/SEOHead';
 import { caseStudies } from '@data/caseStudies';
 import { services } from '@data/services';
 import { team } from '@data/team';
+import { testimonials } from '@data/testimonials';
 import { siteMetadata } from '@data/siteMetadata';
+
+/** Four-step delivery process shown in the "How we work" band. */
+const PROCESS_STEPS: { title: string; detail: string }[] = [
+  {
+    title: 'Discover',
+    detail:
+      'We map your goals, users, and constraints, then pressure-test the idea before a line of code is written.',
+  },
+  {
+    title: 'Design',
+    detail:
+      'We shape the system and the key flows early, so you react to something real — not a slide deck.',
+  },
+  {
+    title: 'Build',
+    detail:
+      'We engineer in vertical slices, shipping working software continuously with tests baked in from day one.',
+  },
+  {
+    title: 'Sustain',
+    detail:
+      'We stay on after launch — monitoring, hardening, and evolving the product so it keeps earning its place.',
+  },
+];
 
 /** Homepage document metadata (Requirement 40.1). */
 const homeMeta: SEOMeta = {
@@ -267,6 +292,37 @@ export function HomePage(): JSX.Element {
         </AnimationWrapper>
       </section>
 
+      {/* How we work — process band (added content). */}
+      <section
+        aria-label="How we work"
+        className="border-y border-ink-600 bg-ink-800"
+      >
+        <div className="mx-auto w-full max-w-site px-6 py-[clamp(6rem,14vh,11rem)] sm:px-10">
+          <SectionHeader eyebrow="How we work" title="A process you can see" />
+          <ol className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            {PROCESS_STEPS.map((step, index) => (
+              <li
+                key={step.title}
+                className="flex flex-col gap-4 border-t border-ink-600 pt-6"
+              >
+                <span
+                  aria-hidden="true"
+                  className="font-mono text-mono-eyebrow uppercase tracking-[0.2em] text-pulse-500"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-display text-h3 font-semibold text-mist-100">
+                  {step.title}
+                </h3>
+                <p className="font-sans text-body text-mist-300">
+                  {step.detail}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* 6 — Why Us: AnimatedCounter metric row + differentiators (Req 6.3). */}
       <section
         aria-label="Why Ryze"
@@ -327,6 +383,37 @@ export function HomePage(): JSX.Element {
           <MarqueeText items={marqueeItems} />
         </div>
       </section>
+
+      {/* Testimonial pull-quote (added content). */}
+      {testimonials[0] !== undefined ? (
+        <section
+          aria-label="Client testimonial"
+          className="mx-auto w-full max-w-site px-6 py-[clamp(6rem,14vh,11rem)] sm:px-10"
+        >
+          <AnimationWrapper variant="rise">
+            <figure className="mx-auto max-w-5xl">
+              <p
+                aria-hidden="true"
+                className="font-display text-[clamp(3rem,9vw,7rem)] font-bold leading-none text-pulse-500"
+              >
+                &ldquo;
+              </p>
+              <blockquote className="-mt-6 font-display text-[clamp(1.75rem,4.2vw,3.25rem)] font-semibold leading-[1.1] tracking-[-0.01em] text-mist-100">
+                {testimonials[0].quote}
+              </blockquote>
+              <figcaption className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-mono-eyebrow uppercase tracking-[0.18em] text-mist-300">
+                <span className="text-mist-100">{testimonials[0].author}</span>
+                <span aria-hidden="true" className="text-pulse-500">
+                  /
+                </span>
+                <span>
+                  {testimonials[0].authorRole}, {testimonials[0].company}
+                </span>
+              </figcaption>
+            </figure>
+          </AnimationWrapper>
+        </section>
+      ) : null}
 
       {/* 8 — CTA: MagneticButton → /contact (Requirement 6.4). */}
       <CTA
