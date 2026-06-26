@@ -257,7 +257,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - RTL + jest-axe for SplitText accessible name, AnimatedCounter final value under reduced motion, MagneticButton no-transform under reduced motion, Lightbox keyboard/focus/wrap and empty no-op, Marquee pause
     - _Requirements: 25.2, 21.3, 23.2, 33.1, 33.5, 24.2_
 
-- [ ] 10. Shared UI components
+- [x] 10. Shared UI components
   - [x] 10.1 Implement CustomCursor
     - Mount only on fine pointer + motion allowed; hide native cursor; states default/hover-link/magnetic/view/text; unmount and restore native cursor on touch-only, reduced motion, or pointer-leave
     - _Requirements: 22.1, 22.2, 22.3, 22.4, 22.5_
@@ -274,7 +274,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - `ScrollIndicator`, `SectionHeader` (eyebrow/title/align/as), and reusable `CTA` (heading + MagneticButton link)
     - _Requirements: 6.4, 9.3, 38.1_
 
-  - [ ] 10.5 Implement content cards
+  - [x] 10.5 Implement content cards
     - `CaseStudyCard`, `ServiceCard`, `TeamCard`, `BlogCard` (image, category, title, excerpt, date, reading time), `TestimonialCard`; reserved aspect-ratio media boxes; image `onError` swap to blurDataURL/placeholder
     - _Requirements: 7.1, 9.1, 11.2, 14.1, 8.1, 39.3, 42.3_
 
@@ -287,7 +287,7 @@ Test sub-tasks are marked optional with `*`. Every task references the specific 
     - `canRenderWebGL(opts)` checks WebGL2 availability, cores ≥ 4, memory ≥ 4 GB, and save-data disabled
     - _Requirements: 19.3, 19.4_
 
-  - [ ] 11.2 Implement HeroFallback and Hero decision component
+  - [x] 11.2 Implement HeroFallback and Hero decision component
     - `HeroFallback` (static poster/CSS mesh + CSS text reveal); `Hero` renders fallback first, and only when motion is allowed + WebGL2 available + gate passes, lazily imports and mounts Hero_WebGL behind an IntersectionObserver, cross-fading from fallback when ready
     - _Requirements: 19.1, 19.2, 19.3, 19.4, 19.5, 19.6_
 
