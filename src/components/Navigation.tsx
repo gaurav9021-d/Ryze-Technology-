@@ -176,23 +176,23 @@ function DesktopDropdown({ item }: { item: NavItem & { children: NavChild[] } })
         // Wrapper carries a transparent top padding that BRIDGES the gap to the
         // button, so moving the cursor from the button to the panel never
         // leaves the hover container (fixes the "closes before click" bug).
-        <div className="absolute left-0 top-full z-50 pt-3">
+        <div className="absolute left-0 top-full z-[70] pt-3">
           <ul
             id={menuId}
             role="menu"
             aria-label={item.label}
-            className="flex max-w-[min(92vw,44rem)] flex-wrap gap-2 rounded-xl border border-ink-600 bg-ink-800 p-2 shadow-[0_24px_60px_-24px_rgba(10,10,8,0.45)]"
+            className="grid w-[min(92vw,40rem)] grid-cols-2 gap-1.5 rounded-xl border border-ink-600 bg-white p-2.5 shadow-[0_28px_70px_-18px_rgba(10,10,8,0.45)] ring-1 ring-black/5"
           >
             {item.children.map((child) => (
-              <li key={`${child.label}-${child.path}`} role="none" className="w-48 shrink-0">
+              <li key={`${child.label}-${child.path}`} role="none">
                 <Link
                   role="menuitem"
                   to={child.path}
                   data-cursor="link"
-                  className="flex h-full flex-col gap-1 rounded-lg px-3 py-3 text-mist-100 transition-colors hover:bg-ink-700 hover:text-pulse-500 focus-visible:bg-ink-700 focus-visible:text-pulse-500"
+                  className="flex h-full flex-col gap-1 rounded-lg border border-transparent px-3.5 py-3 transition-colors hover:border-ink-600 hover:bg-ink-700 focus-visible:border-ink-600 focus-visible:bg-ink-700"
                   onClick={() => setOpen(false)}
                 >
-                  <span className="font-mono text-sm tracking-wide">
+                  <span className="font-mono text-sm font-medium tracking-wide text-mist-100">
                     {child.label}
                   </span>
                   {child.description !== undefined ? (
