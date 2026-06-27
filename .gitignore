@@ -20,3 +20,4 @@ dist-ssr
 *.sln
 *.sw?
 favicon-for-ryze-tech.mov
+.DS_Store
