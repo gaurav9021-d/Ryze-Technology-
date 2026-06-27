@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 import { Logo } from './Logo';
 import { siteMetadata } from '@data/siteMetadata';
-import { footerLegalLinks } from '@data/navigation';
+import { footerNav, footerLegalLinks } from '@data/navigation';
 import type { SiteMetadata, SocialLink } from '@app-types';
 
 export interface FooterProps {
@@ -47,59 +47,93 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
   return (
     <footer
       role="contentinfo"
-      className="border-t border-ink-600 bg-ink-900 text-mist-300"
+      className="bg-[#0a0a08] text-[#9aa3b2]"
     >
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 py-8 md:flex-row md:items-center md:justify-between">
-        {/* Brand + copyright */}
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+      {/* Main: brand + contact block, then the link columns. */}
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-16 md:grid-cols-[1.6fr_repeat(3,1fr)]">
+        {/* Brand + contact */}
+        <div className="flex flex-col gap-5">
           <Link
             to="/"
             aria-label="Ryze Technology home"
             className="inline-flex transition-opacity hover:opacity-80 focus-visible:opacity-80"
           >
-            <Logo variant="full" height={24} />
+            <Logo variant="full" height={34} tone="light" />
           </Link>
-          <p className="font-mono text-xs text-mist-300">
-            © {year} {metadata.siteName}
+          <p className="max-w-xs text-sm leading-relaxed text-[#9aa3b2]">
+            {metadata.defaultDescription}
           </p>
+          <div className="mt-2 flex flex-col gap-1">
+            <a
+              href={`mailto:${metadata.contactEmail}`}
+              className="font-mono text-sm text-[#e8eef7] transition-colors hover:text-[#5b93f0]"
+            >
+              {metadata.contactEmail}
+            </a>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#6b7280]">
+              Nagpur, India · Worldwide
+            </p>
+          </div>
         </div>
 
-        {/* Social + email + legal */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-          <ul className="flex flex-wrap gap-5" aria-label="Social media">
-            {metadata.social.map((link) => (
-              <li key={link.platform}>
-                <a
-                  href={socialHref(link)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-xs text-mist-300 transition-colors hover:text-pulse-500"
-                >
-                  {SOCIAL_LABELS[link.platform]}
-                </a>
-              </li>
-            ))}
-          </ul>
+        {/* Link columns (first three groups). */}
+        {footerNav.slice(0, 3).map((group) => (
+          <nav key={group.title} aria-label={group.title}>
+            <h2 className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-[#e8eef7]">
+              {group.title}
+            </h2>
+            <ul className="mt-5 space-y-3">
+              {group.links.map((link) => (
+                <li key={`${group.title}-${link.label}-${link.path}`}>
+                  <Link
+                    to={link.path}
+                    className="text-sm text-[#9aa3b2] transition-colors hover:text-[#5b93f0]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+      </div>
 
-          <a
-            href={`mailto:${metadata.contactEmail}`}
-            className="font-mono text-xs text-mist-100 transition-colors hover:text-pulse-500"
-          >
-            {metadata.contactEmail}
-          </a>
+      {/* Slim bottom bar: copyright + social + legal. */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 py-6 md:flex-row md:items-center md:justify-between">
+          <p className="font-mono text-xs text-[#6b7280]">
+            © {year} {metadata.siteName}. All rights reserved.
+          </p>
 
-          <ul className="flex flex-wrap gap-5" aria-label="Legal">
-            {footerLegalLinks.map((link) => (
-              <li key={link.path}>
-                <Link
-                  to={link.path}
-                  className="font-mono text-xs text-mist-300 transition-colors hover:text-pulse-500"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+            <ul className="flex flex-wrap gap-5" aria-label="Social media">
+              {metadata.social.map((link) => (
+                <li key={link.platform}>
+                  <a
+                    href={socialHref(link)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-xs text-[#9aa3b2] transition-colors hover:text-[#5b93f0]"
+                  >
+                    {SOCIAL_LABELS[link.platform]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <ul className="flex flex-wrap gap-5" aria-label="Legal">
+              {footerLegalLinks.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="font-mono text-xs text-[#9aa3b2] transition-colors hover:text-[#5b93f0]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </footer>

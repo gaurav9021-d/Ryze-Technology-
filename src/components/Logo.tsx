@@ -24,6 +24,8 @@ export interface LogoProps {
   variant?: 'full' | 'mark';
   /** Pixel height of the mark. Wordmark scales relative to it. Default 32. */
   height?: number;
+  /** `light` tones the wordmark + monogram counter for a dark surface. */
+  tone?: 'default' | 'light';
   /** Extra classes for the wrapping element. */
   className?: string;
 }
@@ -60,8 +62,8 @@ function Mark({ size }: { size: number }): JSX.Element {
         d="M9 8 H30 a14 14 0 0 1 0 28 H22 l14 16 H22 L8 36 V8 Z"
         fill="url(#ryze-r)"
       />
-      {/* Counter (the hole in the R bowl) punched as paper-colored notch. */}
-      <path d="M16 15 H29 a7 7 0 0 1 0 14 H16 Z" fill="var(--ink-900)" />
+      {/* Counter (the hole in the R bowl) — matches the surface behind it. */}
+      <path d="M16 15 H29 a7 7 0 0 1 0 14 H16 Z" fill="var(--logo-counter, var(--ink-900))" />
     </svg>
   );
 }
@@ -69,6 +71,7 @@ function Mark({ size }: { size: number }): JSX.Element {
 export function Logo({
   variant = 'full',
   height = 32,
+  tone = 'default',
   className,
 }: LogoProps): JSX.Element {
   const wrapperClass = [
@@ -78,19 +81,30 @@ export function Logo({
     .filter(Boolean)
     .join(' ');
 
+  // On a dark surface, tone the wordmark light and match the R counter to the
+  // dark footer surface so the bowl reads correctly.
+  const wrapperStyle =
+    tone === 'light'
+      ? ({ ['--logo-counter' as string]: '#0a0a08' } as React.CSSProperties)
+      : undefined;
+  const wordmarkClass =
+    tone === 'light' ? 'text-[#f3f1ea]' : 'text-mist-100';
+
   if (variant === 'mark') {
     return (
-      <span className={wrapperClass}>
+      <span className={wrapperClass} style={wrapperStyle}>
         <Mark size={height} />
       </span>
     );
   }
 
   return (
-    <span className={wrapperClass}>
+    <span className={wrapperClass} style={wrapperStyle}>
       <Mark size={height} />
       <span className="flex flex-col leading-none">
-        <span className="font-display text-[1.05rem] font-bold uppercase tracking-[0.14em] text-mist-100">
+        <span
+          className={`font-display text-[1.05rem] font-bold uppercase tracking-[0.14em] ${wordmarkClass}`}
+        >
           Ryze
         </span>
         <span className="font-mono text-[0.5rem] font-medium uppercase tracking-[0.34em] text-pulse-500">
