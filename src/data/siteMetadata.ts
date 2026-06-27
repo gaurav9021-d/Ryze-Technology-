@@ -27,7 +27,7 @@ const contactEndpoint: string =
   import.meta.env.VITE_CONTACT_ENDPOINT ?? DEFAULT_CONTACT_ENDPOINT;
 
 const defaultOgImage: ImageAsset = {
-  src: '/images/og/default.jpg',
+  src: '/images/og/default.png',
   width: 1200,
   height: 630,
   alt: 'Ryze Technology — a software studio engineering durable web, mobile, and business systems',

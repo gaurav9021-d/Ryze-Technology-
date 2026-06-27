@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  .canvas {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    background: #f3f1ea;
+    color: #14140f;
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 72px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  /* faint grid accent */
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(20,20,15,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(20,20,15,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    -webkit-mask-image: radial-gradient(90% 90% at 70% 40%, #000 35%, transparent 100%);
+            mask-image: radial-gradient(90% 90% at 70% 40%, #000 35%, transparent 100%);
+  }
+  .glow {
+    position: absolute; right: -120px; top: -140px;
+    width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(33,86,201,0.18), transparent 65%);
+  }
+  .row { position: relative; display: flex; align-items: center; gap: 22px; }
+  .mark {
+    width: 64px; height: 64px; border-radius: 14px;
+    background: #2156c9; color: #f3f1ea;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 40px; line-height: 1;
+  }
+  .wordmark { font-weight: 700; font-size: 34px; letter-spacing: -0.02em; }
+  .wordmark .tech { color: #2156c9; }
+  .eyebrow {
+    position: relative;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 19px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #2156c9;
+  }
+  h1 {
+    position: relative;
+    font-weight: 700; font-size: 92px; line-height: 0.94;
+    letter-spacing: -0.03em; max-width: 16ch; margin-top: 18px;
+  }
+  .accent { color: #2156c9; }
+  .foot { position: relative; display: flex; justify-content: space-between; align-items: flex-end; }
+  .tagline { font-size: 24px; font-weight: 500; color: #44443c; max-width: 30ch; }
+  .url {
+    font-family: 'JetBrains Mono', monospace; font-size: 19px;
+    letter-spacing: 0.04em; color: #14140f;
+    border-top: 3px solid #14140f; padding-top: 12px;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="grid"></div>
+    <div class="glow"></div>
+
+    <div class="row">
+      <div class="mark">R</div>
+      <div class="wordmark">Ryze<span class="tech"> Technology</span></div>
+    </div>
+
+    <div>
+      <div class="eyebrow">Software Studio</div>
+      <h1>Software built to <span class="accent">last.</span></h1>
+    </div>
+
+    <div class="foot">
+      <div class="tagline">Durable websites, apps, and systems — designed and engineered in-house.</div>
+      <div class="url">ryze.technology</div>
+    </div>
+  </div>
+</body>
+</html>
