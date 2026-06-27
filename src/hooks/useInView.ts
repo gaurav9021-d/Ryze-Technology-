@@ -67,6 +67,27 @@ export function useInView<T extends Element>(
       return;
     }
 
+    // Synchronous mount-time check: if the element is already within the
+    // viewport when it mounts (e.g. above-the-fold content after a client-side
+    // route change, where the async observer callback can fail to fire after an
+    // AnimatePresence transition), reveal it immediately so content is never
+    // trapped in its hidden start state.
+    const rect = element.getBoundingClientRect();
+    const viewportH = window.innerHeight || document.documentElement.clientHeight;
+    const viewportW = window.innerWidth || document.documentElement.clientWidth;
+    const alreadyVisible =
+      rect.bottom > 0 &&
+      rect.right > 0 &&
+      rect.top < viewportH &&
+      rect.left < viewportW;
+
+    if (alreadyVisible) {
+      setInView(true);
+      if (once) {
+        return;
+      }
+    }
+
     const observerOptions: IntersectionObserverInit = {};
     if (threshold !== undefined) {
       observerOptions.threshold = threshold;

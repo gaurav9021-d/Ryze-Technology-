@@ -28,7 +28,7 @@
  *                    parent `element`, or recompose the children directly).
  *   - `router`     — a ready-to-use `createBrowserRouter(appRoutes)` instance.
  */
-import { lazy, Suspense, type ReactNode } from 'react';
+import { lazy, Suspense, type ComponentType, type ReactNode } from 'react';
 import {
   createBrowserRouter,
   type RouteObject,
@@ -38,22 +38,63 @@ import { AppLayout } from '@components/AppLayout';
 import { RouteErrorBoundary } from '@components/ErrorBoundary';
 import { RouteSkeleton } from '@components/RouteSkeleton';
 
+/**
+ * `React.lazy` with stale-deploy recovery. When a dynamic chunk import fails —
+ * the classic symptom after a new deploy, where a cached `index.html` requests
+ * route chunks by hashes that no longer exist — we force a one-time full page
+ * reload so the browser fetches the fresh `index.html` and current chunk
+ * hashes. A `sessionStorage` flag guards against reload loops if the failure is
+ * genuine (offline/real 404): the second failure rejects normally so the
+ * route's error boundary can show its retry UI.
+ */
+function lazyWithReload<T extends ComponentType<any>>( // eslint-disable-line @typescript-eslint/no-explicit-any
+  factory: () => Promise<{ default: T }>,
+): React.LazyExoticComponent<T> {
+  return lazy(() =>
+    factory().catch((error: unknown) => {
+      const KEY = 'ryze:chunk-reload';
+      const alreadyReloaded =
+        typeof sessionStorage !== 'undefined' &&
+        sessionStorage.getItem(KEY) === '1';
+
+      if (!alreadyReloaded && typeof window !== 'undefined') {
+        try {
+          sessionStorage.setItem(KEY, '1');
+        } catch {
+          /* storage unavailable — fall through to reload anyway */
+        }
+        window.location.reload();
+        // Return a never-resolving promise so nothing renders before reload.
+        return new Promise<{ default: T }>(() => {});
+      }
+
+      // Second failure: clear the flag and rethrow so the error boundary shows.
+      try {
+        sessionStorage.removeItem(KEY);
+      } catch {
+        /* ignore */
+      }
+      throw error;
+    }),
+  );
+}
+
 // ── Lazy-loaded Page_Modules ────────────────────────────────────────────────
-// Each page module exports a `default`, so `React.lazy(() => import(...))`
-// resolves directly to the component.
-const HomePage = lazy(() => import('@pages/HomePage'));
-const PortfolioListPage = lazy(() => import('@pages/PortfolioListPage'));
-const CaseStudyPage = lazy(() => import('@pages/CaseStudyPage'));
-const ServicesPage = lazy(() => import('@pages/ServicesPage'));
-const ServiceDetailPage = lazy(() => import('@pages/ServiceDetailPage'));
-const AboutPage = lazy(() => import('@pages/AboutPage'));
-const ManifestoPage = lazy(() => import('@pages/ManifestoPage'));
-const ContactPage = lazy(() => import('@pages/ContactPage'));
-const BlogListPage = lazy(() => import('@pages/BlogListPage'));
-const BlogPostPage = lazy(() => import('@pages/BlogPostPage'));
-const ResourcesPage = lazy(() => import('@pages/ResourcesPage'));
-const LegalPage = lazy(() => import('@pages/LegalPage'));
-const NotFoundPage = lazy(() => import('@pages/NotFoundPage'));
+// Each page module exports a `default`, so the import resolves directly to the
+// component. `lazyWithReload` adds one-shot reload recovery for stale chunks.
+const HomePage = lazyWithReload(() => import('@pages/HomePage'));
+const PortfolioListPage = lazyWithReload(() => import('@pages/PortfolioListPage'));
+const CaseStudyPage = lazyWithReload(() => import('@pages/CaseStudyPage'));
+const ServicesPage = lazyWithReload(() => import('@pages/ServicesPage'));
+const ServiceDetailPage = lazyWithReload(() => import('@pages/ServiceDetailPage'));
+const AboutPage = lazyWithReload(() => import('@pages/AboutPage'));
+const ManifestoPage = lazyWithReload(() => import('@pages/ManifestoPage'));
+const ContactPage = lazyWithReload(() => import('@pages/ContactPage'));
+const BlogListPage = lazyWithReload(() => import('@pages/BlogListPage'));
+const BlogPostPage = lazyWithReload(() => import('@pages/BlogPostPage'));
+const ResourcesPage = lazyWithReload(() => import('@pages/ResourcesPage'));
+const LegalPage = lazyWithReload(() => import('@pages/LegalPage'));
+const NotFoundPage = lazyWithReload(() => import('@pages/NotFoundPage'));
 
 /**
  * Wrap a lazily-loaded route element in its per-route error boundary and a

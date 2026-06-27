@@ -25,7 +25,6 @@
  */
 import { Children, type ReactNode } from 'react';
 import { motion, type TargetAndTransition, type Variants } from 'framer-motion';
-import { useInView } from '@hooks/useInView';
 import { useReducedMotion } from '@hooks/useReducedMotion';
 
 export type AnimationVariant = 'rise' | 'fade' | 'clip' | 'scale';
@@ -86,7 +85,6 @@ export function AnimationWrapper({
   threshold = 0.2,
 }: AnimationWrapperProps): JSX.Element {
   const reducedMotion = useReducedMotion();
-  const { ref, inView } = useInView<HTMLDivElement>({ threshold, once });
 
   // Reduced motion: render the final visible state instantly (Req 37.2, 25.1).
   if (reducedMotion) {
@@ -94,7 +92,12 @@ export function AnimationWrapper({
   }
 
   const { hidden, visible } = statesFor(variant);
-  const animateState = inView ? 'visible' : 'hidden';
+
+  // Framer Motion's `whileInView` manages its own IntersectionObserver and
+  // evaluates on mount — including for content already in view after a
+  // client-side route change — so reveals never get trapped hidden when
+  // navigating between pages. `viewport.amount` mirrors the old threshold.
+  const viewport = { once, amount: threshold } as const;
 
   // Staggered reveal: orchestrate direct children one after another.
   if (stagger !== undefined && stagger > 0) {
@@ -109,11 +112,11 @@ export function AnimationWrapper({
 
     return (
       <motion.div
-        ref={ref}
         data-animation-wrapper=""
         variants={container}
         initial="hidden"
-        animate={animateState}
+        whileInView="visible"
+        viewport={viewport}
       >
         {Children.map(children, (child, index) => (
           <motion.div key={index} variants={item}>
@@ -132,11 +135,11 @@ export function AnimationWrapper({
 
   return (
     <motion.div
-      ref={ref}
       data-animation-wrapper=""
       variants={variants}
       initial="hidden"
-      animate={animateState}
+      whileInView="visible"
+      viewport={viewport}
     >
       {children}
     </motion.div>
