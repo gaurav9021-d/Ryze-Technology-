@@ -181,10 +181,16 @@ function DesktopDropdown({ item }: { item: NavItem & { children: NavChild[] } })
             id={menuId}
             role="menu"
             aria-label={item.label}
-            className="flex w-[min(92vw,22rem)] flex-col gap-1 rounded-xl border border-ink-600 bg-white p-2.5 shadow-[0_28px_70px_-18px_rgba(10,10,8,0.45)] ring-1 ring-black/5"
+            className="flex w-[min(92vw,22rem)] flex-col rounded-xl border border-ink-600 bg-white p-2.5 shadow-[0_28px_70px_-18px_rgba(10,10,8,0.45)] ring-1 ring-black/5"
           >
-            {item.children.map((child) => (
+            {item.children.map((child, index) => (
               <li key={`${child.label}-${child.path}`} role="none">
+                {index > 0 ? (
+                  <div
+                    aria-hidden="true"
+                    className="mx-2 h-px bg-gradient-to-r from-transparent via-black/40 to-transparent"
+                  />
+                ) : null}
                 <Link
                   role="menuitem"
                   to={child.path}
