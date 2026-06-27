@@ -91,6 +91,39 @@ function useScrolledPastTop(enabled: boolean): boolean {
 }
 
 /**
+ * Scroll progress in [0,1] across the first `max` pixels of the page. Drives the
+ * header underline color morph (black → brand blue) as the visitor scrolls.
+ */
+function useScrollProgress(max = 600): number {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    const onScroll = (): void => {
+      setProgress(Math.min(1, Math.max(0, window.scrollY / max)));
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [max]);
+
+  return progress;
+}
+
+/**
+ * Interpolate the header underline color from black (at the top) to the Ryze
+ * brand blue (once scrolled) based on `progress` in [0,1].
+ */
+function underlineColor(progress: number): string {
+  const from = { r: 10, g: 10, b: 8 }; // #0a0a08 — black
+  const to = { r: 33, g: 86, b: 201 }; // #2156c9 — brand blue
+  const r = Math.round(from.r + (to.r - from.r) * progress);
+  const g = Math.round(from.g + (to.g - from.g) * progress);
+  const b = Math.round(from.b + (to.b - from.b) * progress);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+/**
  * A single desktop dropdown parent. Reveals its children on hover and on
  * keyboard focus, exposing a disclosure button with `aria-haspopup` /
  * `aria-expanded` so the menu is reachable and announced (Requirement 1.3).
@@ -341,11 +374,13 @@ export function Navigation({
   }, []);
 
   const solid = !transparentUntilScroll || scrolled || menuOpen;
+  const scrollProgress = useScrollProgress();
 
   return (
     <header
+      style={{ borderBottomColor: underlineColor(scrollProgress) }}
       className={[
-        'fixed inset-x-0 top-0 z-50 w-full border-b border-[#0a0a08] transition-colors duration-300',
+        'fixed inset-x-0 top-0 z-50 w-full border-b transition-colors duration-300',
         solid ? 'bg-[#cdcabf]/90 backdrop-blur-md shadow-[0_1px_14px_-6px_rgba(10,10,8,0.5)]' : 'bg-transparent',
       ].join(' ')}
     >
