@@ -27,6 +27,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import type { PortfolioCategory, SEOMeta } from '@app-types';
 import { CaseStudyCard } from '@components/CaseStudyCard';
+import { AnimatedCounter } from '@components/AnimatedCounter';
+import { MarqueeText } from '@components/MarqueeText';
 import { CTA } from '@components/CTA';
 import { SEOHead } from '@components/SEOHead';
 import { AnimationWrapper } from '@components/AnimationWrapper';
@@ -51,6 +53,31 @@ const FILTERS: ReadonlyArray<{ value: FilterValue; label: string }> = [
   { value: 'websites', label: 'Websites' },
   { value: 'mobile', label: 'Mobile' },
   { value: 'systems', label: 'Systems' },
+];
+
+/** Credibility stats shown in the "by the numbers" band. */
+const STATS: ReadonlyArray<{
+  value: number;
+  suffix?: string;
+  decimals?: number;
+  label: string;
+}> = [
+  { value: 50, suffix: '+', label: 'Products shipped' },
+  { value: 99.9, suffix: '%', decimals: 1, label: 'Average uptime' },
+  { value: 8, suffix: ' yrs', label: 'Building software' },
+  { value: 12, suffix: '+', label: 'Industries served' },
+];
+
+/** Industries marquee content. */
+const INDUSTRIES: ReadonlyArray<string> = [
+  'Retail',
+  'Healthcare',
+  'Logistics',
+  'Fintech',
+  'Education',
+  'Hospitality',
+  'Manufacturing',
+  'SaaS',
 ];
 
 export function PortfolioListPage(): JSX.Element {
@@ -155,6 +182,54 @@ export function PortfolioListPage(): JSX.Element {
               ))}
             </AnimatePresence>
           </motion.ul>
+        </section>
+
+        {/* By the numbers — credibility band. */}
+        <section
+          aria-label="By the numbers"
+          className="border-y border-ink-600 bg-ink-800"
+        >
+          <div className="mx-auto w-full max-w-site px-6 py-[clamp(4rem,10vh,7rem)] sm:px-10">
+            <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
+              The track record
+            </p>
+            <dl className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+              {STATS.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="flex flex-col gap-2 border-t border-ink-600 pt-5"
+                >
+                  <dt className="sr-only">{stat.label}</dt>
+                  <dd className="font-display text-[clamp(2.75rem,6vw,4.5rem)] font-bold leading-[0.9] tracking-[-0.03em] text-mist-100">
+                    <AnimatedCounter
+                      value={stat.value}
+                      decimals={stat.decimals ?? 0}
+                      suffix={stat.suffix ?? ''}
+                    />
+                  </dd>
+                  <p
+                    aria-hidden="true"
+                    className="font-mono text-mono-eyebrow uppercase tracking-[0.18em] text-mist-300"
+                  >
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        {/* Industries marquee. */}
+        <section
+          aria-label="Industries we serve"
+          className="overflow-hidden py-[clamp(3.5rem,8vh,5.5rem)]"
+        >
+          <p className="mb-8 px-6 font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-mist-300 sm:px-10">
+            Trusted across industries
+          </p>
+          <div className="font-display text-[clamp(1.75rem,5vw,3.5rem)] font-bold uppercase tracking-tight text-mist-100">
+            <MarqueeText items={[...INDUSTRIES]} />
+          </div>
         </section>
 
         {/* Closing CTA. */}

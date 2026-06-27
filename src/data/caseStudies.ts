@@ -202,4 +202,274 @@ export const caseStudies: CaseStudy[] = [
       canonical: 'https://ryze.technology/portfolio/vidarbha-logistics-hub',
     },
   },
+  {
+    slug: 'aurora-finance-dashboard',
+    title: 'A finance dashboard that turns raw ledgers into decisions',
+    client: 'Aurora Capital',
+    category: 'websites',
+    services: ['websites', 'business-systems'],
+    year: 2024,
+    role: 'Product design, data viz, full-stack engineering',
+    featured: false,
+    order: 4,
+    summary:
+      'A boutique investment firm drowned in spreadsheets. We built a real-time portfolio dashboard that surfaces risk, returns, and cash flow at a glance.',
+    hero: {
+      src: '/images/case-studies/aurora-finance-dashboard-hero.jpg',
+      width: 1600,
+      height: 900,
+      alt: 'Aurora Capital portfolio dashboard with charts',
+    },
+    challenge:
+      'Analysts spent the first two hours of every day stitching numbers together by hand. Reporting was always a day behind, and no one could answer a client question without rebuilding a spreadsheet from scratch.',
+    solution:
+      'We built a real-time dashboard that ingests custodial feeds, computes risk and performance on the fly, and renders fast, interactive charts. Saved views and one-click client reports replaced the morning spreadsheet ritual entirely.',
+    results: [
+      { label: 'Reporting time saved', value: 90, suffix: '%' },
+      { label: 'Live data latency', value: 2, suffix: 's' },
+      { label: 'Client reports faster', value: 8, suffix: 'x' },
+      { label: 'Dashboards in use', value: 40, suffix: '+' },
+    ],
+    gallery: [
+      {
+        src: '/images/case-studies/aurora-finance-dashboard-gallery-1.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Portfolio performance overview',
+      },
+      {
+        src: '/images/case-studies/aurora-finance-dashboard-gallery-2.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Risk breakdown by asset class',
+      },
+    ],
+    techStack: ['React', 'TypeScript', 'D3', 'Node.js', 'PostgreSQL', 'Redis'],
+    learnings: [
+      'Pre-aggregating metrics on ingest kept the dashboard instant even with millions of rows.',
+      'Letting analysts save their own views removed 80% of one-off report requests.',
+    ],
+    seo: {
+      title: 'Aurora Capital — Real-time finance dashboard',
+      description:
+        'A real-time portfolio dashboard that cut an investment firm\u2019s reporting time by 90%.',
+      canonical: 'https://ryze.technology/portfolio/aurora-finance-dashboard',
+    },
+  },
+  {
+    slug: 'trailhead-booking-platform',
+    title: 'A booking platform that filled off-season weekends',
+    client: 'Trailhead Stays',
+    category: 'websites',
+    services: ['websites'],
+    year: 2023,
+    role: 'Design, full-stack engineering, payments',
+    featured: false,
+    order: 5,
+    summary:
+      'A network of boutique homestays needed direct bookings to escape high OTA commissions. We built a conversion-focused booking platform with dynamic pricing.',
+    hero: {
+      src: '/images/case-studies/trailhead-booking-platform-hero.jpg',
+      width: 1600,
+      height: 900,
+      alt: 'Trailhead Stays booking website with a property gallery',
+    },
+    challenge:
+      'Owners handed 22% of every booking to third-party platforms and had no relationship with their guests. Their old site couldn\u2019t take a payment, so every reservation meant a flurry of calls.',
+    solution:
+      'We launched a direct-booking platform with real-time availability, dynamic seasonal pricing, and instant payments. A lightweight CRM keeps guest history so owners can win repeat stays without the middleman.',
+    results: [
+      { label: 'Direct bookings', value: 73, suffix: '%' },
+      { label: 'Commission saved', value: 22, suffix: '%' },
+      { label: 'Off-season occupancy', value: 41, suffix: '%' },
+      { label: 'Repeat guests', value: 2, suffix: 'x' },
+    ],
+    gallery: [
+      {
+        src: '/images/case-studies/trailhead-booking-platform-gallery-1.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Property detail page with availability calendar',
+      },
+      {
+        src: '/images/case-studies/trailhead-booking-platform-gallery-2.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Checkout flow with instant payment',
+      },
+    ],
+    techStack: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL', 'Tailwind CSS'],
+    learnings: [
+      'Transparent dynamic pricing converted better than hidden discount codes.',
+      'A two-step checkout cut booking abandonment nearly in half.',
+    ],
+    seo: {
+      title: 'Trailhead Stays — Direct booking platform',
+      description:
+        'A direct-booking platform that took 73% of reservations off commission-heavy OTAs.',
+      canonical: 'https://ryze.technology/portfolio/trailhead-booking-platform',
+    },
+  },
+  {
+    slug: 'fieldwise-inspection-app',
+    title: 'A field inspection app that works miles from a signal',
+    client: 'FieldWise',
+    category: 'mobile',
+    services: ['mobile-apps', 'business-systems'],
+    year: 2024,
+    role: 'Mobile architecture, offline sync, integrations',
+    featured: false,
+    order: 6,
+    summary:
+      'Inspectors logged site visits on paper and re-keyed them at night. We built an offline mobile app that captures structured reports and photos in the field.',
+    hero: {
+      src: '/images/case-studies/fieldwise-inspection-app-hero.jpg',
+      width: 1600,
+      height: 900,
+      alt: 'FieldWise inspection app on a rugged phone at a work site',
+    },
+    challenge:
+      'Field teams worked at remote sites with no connectivity, then spent evenings transcribing paper forms. Photos got lost, reports were inconsistent, and head office was always days behind.',
+    solution:
+      'We built an offline-first inspection app with structured checklists, on-device photo capture and annotation, and GPS-stamped entries that sync automatically when a connection returns. Managers get clean, consistent reports in real time.',
+    results: [
+      { label: 'Report turnaround', value: 95, suffix: '%' },
+      { label: 'Re-keying removed', value: 100, suffix: '%' },
+      { label: 'Inspections / day', value: 3, suffix: 'x' },
+      { label: 'Field users', value: 600, suffix: '+' },
+    ],
+    gallery: [
+      {
+        src: '/images/case-studies/fieldwise-inspection-app-gallery-1.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Structured inspection checklist screen',
+      },
+      {
+        src: '/images/case-studies/fieldwise-inspection-app-gallery-2.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Photo annotation tool in the field',
+      },
+    ],
+    techStack: ['React Native', 'TypeScript', 'SQLite', 'Node.js', 'AWS S3'],
+    learnings: [
+      'Capturing structured data at the source eliminated an entire transcription job.',
+      'Queuing photo uploads separately from form data made sync feel instant.',
+    ],
+    seo: {
+      title: 'FieldWise — Offline field inspection app',
+      description:
+        'An offline-first inspection app that cut report turnaround by 95% for remote field teams.',
+      canonical: 'https://ryze.technology/portfolio/fieldwise-inspection-app',
+    },
+  },
+  {
+    slug: 'lumen-learning-app',
+    title: 'A learning app that made daily practice a habit',
+    client: 'Lumen Education',
+    category: 'mobile',
+    services: ['mobile-apps'],
+    year: 2023,
+    role: 'Product design, mobile engineering, gamification',
+    featured: false,
+    order: 7,
+    summary:
+      'An ed-tech startup had great content but poor retention. We rebuilt the mobile experience around streaks, spaced repetition, and bite-sized lessons.',
+    hero: {
+      src: '/images/case-studies/lumen-learning-app-hero.jpg',
+      width: 1600,
+      height: 900,
+      alt: 'Lumen learning app lesson and streak screens',
+    },
+    challenge:
+      'Learners signed up, did one lesson, and never returned. The content was strong, but nothing pulled people back the next day, and progress felt invisible.',
+    solution:
+      'We redesigned the app around short daily sessions, a spaced-repetition engine that resurfaces the right material, and a streak system with gentle nudges. Progress is visualized so learners feel momentum every session.',
+    results: [
+      { label: 'Day-30 retention', value: 3, suffix: 'x' },
+      { label: 'Daily active users', value: 156, suffix: '%' },
+      { label: 'Lessons completed', value: 4, suffix: 'x' },
+      { label: 'Avg. streak length', value: 18, suffix: ' days' },
+    ],
+    gallery: [
+      {
+        src: '/images/case-studies/lumen-learning-app-gallery-1.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Daily lesson screen with progress ring',
+      },
+      {
+        src: '/images/case-studies/lumen-learning-app-gallery-2.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Streak and achievements screen',
+      },
+    ],
+    techStack: ['React Native', 'Expo', 'TypeScript', 'GraphQL', 'Node.js'],
+    learnings: [
+      'Spaced repetition drove retention far more than adding new content did.',
+      'A forgiving streak (one free skip a week) kept more users engaged than a strict one.',
+    ],
+    seo: {
+      title: 'Lumen Education — Habit-forming learning app',
+      description:
+        'A mobile learning app rebuilt around streaks and spaced repetition that tripled day-30 retention.',
+      canonical: 'https://ryze.technology/portfolio/lumen-learning-app',
+    },
+  },
+  {
+    slug: 'cobalt-ops-automation',
+    title: 'An automation layer that gave a back office its nights back',
+    client: 'Cobalt Manufacturing',
+    category: 'systems',
+    services: ['business-systems'],
+    year: 2024,
+    role: 'Systems design, integrations, automation',
+    featured: false,
+    order: 8,
+    summary:
+      'A manufacturer\u2019s team copy-pasted between five tools every day. We built an automation layer that connects them and runs the busywork on its own.',
+    hero: {
+      src: '/images/case-studies/cobalt-ops-automation-hero.jpg',
+      width: 1600,
+      height: 900,
+      alt: 'Cobalt Manufacturing automation workflow board',
+    },
+    challenge:
+      'Orders, inventory, invoicing, and shipping lived in five disconnected tools. Staff re-entered the same data into each, errors crept in, and month-end close took a full week.',
+    solution:
+      'We mapped the workflows and built an automation layer that syncs the systems, validates data as it moves, and runs scheduled jobs for invoicing and reporting. A clean console lets the team watch every run and step in only when needed.',
+    results: [
+      { label: 'Manual entry removed', value: 85, suffix: '%' },
+      { label: 'Month-end close', value: 5, suffix: 'x' },
+      { label: 'Data errors cut', value: 78, suffix: '%' },
+      { label: 'Hours saved monthly', value: 320, suffix: '+' },
+    ],
+    gallery: [
+      {
+        src: '/images/case-studies/cobalt-ops-automation-gallery-1.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Automation workflow builder',
+      },
+      {
+        src: '/images/case-studies/cobalt-ops-automation-gallery-2.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'Run history and monitoring console',
+      },
+    ],
+    techStack: ['TypeScript', 'Node.js', 'Temporal', 'PostgreSQL', 'REST APIs'],
+    learnings: [
+      'Validating data in transit caught errors that used to surface only at month-end.',
+      'A visible run history built the team\u2019s trust in letting automation own the busywork.',
+    ],
+    seo: {
+      title: 'Cobalt Manufacturing — Back-office automation layer',
+      description:
+        'An automation layer that removed 85% of manual data entry and made month-end close 5x faster.',
+      canonical: 'https://ryze.technology/portfolio/cobalt-ops-automation',
+    },
+  },
 ];
