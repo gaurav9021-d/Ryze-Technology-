@@ -122,8 +122,8 @@ describe('AboutPage', () => {
     for (const label of [
       'Products shipped',
       'Years building software',
+      'Uptime sustained',
       'Client retention',
-      'Engineers and designers',
     ]) {
       expect(within(region).getByText(label)).toBeInTheDocument();
     }
@@ -135,7 +135,7 @@ describe('AboutPage', () => {
 
     const region = screen.getByRole('region', { name: 'By the numbers' });
     // Under reduced motion AnimatedCounter renders its final value immediately.
-    expect(within(region).getByText('40+')).toBeInTheDocument();
+    expect(within(region).getByText('50+')).toBeInTheDocument();
     expect(within(region).getByText('98%')).toBeInTheDocument();
   });
 

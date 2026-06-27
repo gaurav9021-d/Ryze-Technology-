@@ -199,6 +199,11 @@ export function AppLayout(): JSX.Element {
       <PageTransition routeKey={location.pathname}>
         <Outlet />
       </PageTransition>
+      {/* Visual bridge: fades the page surface into the footer ink tone. */}
+      <div
+        aria-hidden="true"
+        className="h-24 bg-gradient-to-b from-ink-900 to-mist-100"
+      />
       <Footer />
     </>
   );

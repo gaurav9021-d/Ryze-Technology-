@@ -47,7 +47,7 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
   return (
     <footer
       role="contentinfo"
-      className="bg-[#0a0a08] text-[#9aa3b2]"
+      className="bg-mist-100 text-mist-300"
     >
       {/* Main: brand + contact block, then the link columns. */}
       <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-16 md:grid-cols-[1.6fr_repeat(3,1fr)]">
@@ -60,17 +60,17 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
           >
             <Logo variant="full" height={34} tone="light" />
           </Link>
-          <p className="max-w-xs text-sm leading-relaxed text-[#9aa3b2]">
+          <p className="max-w-xs text-sm leading-relaxed text-mist-300">
             {metadata.defaultDescription}
           </p>
           <div className="mt-2 flex flex-col gap-1">
             <a
               href={`mailto:${metadata.contactEmail}`}
-              className="font-mono text-sm text-[#e8eef7] transition-colors hover:text-[#5b93f0]"
+              className="font-mono text-sm text-ink-900 transition-colors hover:text-pulse-400"
             >
               {metadata.contactEmail}
             </a>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#6b7280]">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-mist-300">
               Nagpur, India · Worldwide
             </p>
           </div>
@@ -79,15 +79,15 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
         {/* Link columns (first three groups). */}
         {footerNav.slice(0, 3).map((group) => (
           <nav key={group.title} aria-label={group.title}>
-            <h2 className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-[#e8eef7]">
+            <h3 className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink-900">
               {group.title}
-            </h2>
+            </h3>
             <ul className="mt-5 space-y-3">
               {group.links.map((link) => (
                 <li key={`${group.title}-${link.label}-${link.path}`}>
                   <Link
                     to={link.path}
-                    className="text-sm text-[#9aa3b2] transition-colors hover:text-[#5b93f0]"
+                    className="text-sm text-mist-300 transition-colors hover:text-pulse-500"
                   >
                     {link.label}
                   </Link>
@@ -99,9 +99,9 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
       </div>
 
       {/* Slim bottom bar: copyright + social + legal. */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-ink-600/30">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 py-6 md:flex-row md:items-center md:justify-between">
-          <p className="font-mono text-xs text-[#6b7280]">
+          <p className="font-mono text-xs text-mist-300">
             © {year} {metadata.siteName}. All rights reserved.
           </p>
 
@@ -113,7 +113,7 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
                     href={socialHref(link)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-xs text-[#9aa3b2] transition-colors hover:text-[#5b93f0]"
+                    className="font-mono text-xs text-mist-300 transition-colors hover:text-pulse-500"
                   >
                     {SOCIAL_LABELS[link.platform]}
                   </a>
@@ -126,7 +126,7 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="font-mono text-xs text-[#9aa3b2] transition-colors hover:text-[#5b93f0]"
+                    className="font-mono text-xs text-mist-300 transition-colors hover:text-pulse-500"
                   >
                     {link.label}
                   </Link>

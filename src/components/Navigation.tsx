@@ -381,7 +381,7 @@ export function Navigation({
       style={{ borderBottomColor: underlineColor(scrollProgress) }}
       className={[
         'fixed inset-x-0 top-0 z-50 w-full border-b transition-colors duration-300',
-        solid ? 'bg-[#cdcabf]/90 backdrop-blur-md shadow-[0_1px_14px_-6px_rgba(10,10,8,0.5)]' : 'bg-transparent',
+        solid ? 'bg-ink-700/90 backdrop-blur-md shadow-[0_1px_14px_-6px_rgba(10,10,8,0.5)]' : 'bg-transparent',
       ].join(' ')}
     >
       <nav

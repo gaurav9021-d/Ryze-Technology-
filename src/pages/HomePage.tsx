@@ -54,6 +54,7 @@ import { services } from '@data/services';
 import { team } from '@data/team';
 import { testimonials } from '@data/testimonials';
 import { siteMetadata } from '@data/siteMetadata';
+import { studioMetrics } from '@data/metrics';
 
 /** Four-step delivery process shown in the "How we work" band. */
 const PROCESS_STEPS: { title: string; detail: string }[] = [
@@ -121,20 +122,8 @@ const PROBLEMS: ReadonlyArray<{ title: string; detail: string }> = [
   },
 ];
 
-/**
- * "Why Us" metrics. Each row counts up on scroll-in via {@link AnimatedCounter}
- * (Requirement 6.3) and lands exactly on its target value.
- */
-const METRICS: ReadonlyArray<{
-  value: number;
-  suffix?: string;
-  decimals?: number;
-  label: string;
-}> = [
-  { value: 50, suffix: '+', label: 'Products shipped' },
-  { value: 8, label: 'Years building' },
-  { value: 99.9, decimals: 1, suffix: '%', label: 'Uptime sustained' },
-];
+/** "Why Us" metrics — sourced from the shared studio metrics (single source of truth). */
+const METRICS = studioMetrics.slice(0, 3);
 
 /** What sets the studio apart — the differentiator list under the metrics. */
 const DIFFERENTIATORS: ReadonlyArray<string> = [
@@ -287,7 +276,7 @@ export function HomePage(): JSX.Element {
                 <AnimatedCounter
                   value={metric.value}
                   decimals={metric.decimals ?? 0}
-                  suffix={metric.suffix ?? ''}
+                  suffix={metric.suffix}
                 />
               </dd>
               <p

@@ -2,8 +2,8 @@
  * ContactPage — `/contact` (task 14.15).
  *
  * Composition (design "8. /contact"):
- *   Hero → Contact_Form (with inline validation + submit states) →
- *   Contact info → closing email CTA.
+ *   Editorial hero → two-column layout (Contact_Form + "what happens next"
+ *   rail) → direct-email band → closing CTA.
  *
  * The page renders the `ContactForm` (Requirements 13.1–13.6) beneath a single
  * page `h1`, exposes the studio's contact details, and closes with a CTA that
@@ -14,7 +14,6 @@
  * _Requirements: 13.1, 13.2, 13.3, 13.4, 13.5, 13.6, 38.6_
  */
 import type { SEOMeta } from '@app-types';
-import { SectionHeader } from '@components/SectionHeader';
 import { CTA } from '@components/CTA';
 import { SEOHead } from '@components/SEOHead';
 import { AnimationWrapper } from '@components/AnimationWrapper';
@@ -29,48 +28,102 @@ const seo: SEOMeta = {
   canonical: `${siteMetadata.baseUrl}/contact`,
 };
 
+/** "What happens next" steps shown in the rail beside the form. */
+const NEXT_STEPS: ReadonlyArray<{ title: string; description: string }> = [
+  {
+    title: 'We read every word',
+    description:
+      'A real person — not a bot — reads your message and replies, usually within one business day.',
+  },
+  {
+    title: 'A short discovery call',
+    description:
+      'We talk through goals, scope, and constraints to make sure we are the right fit before anything else.',
+  },
+  {
+    title: 'A clear, honest plan',
+    description:
+      'You get a straight proposal: what we would build, how long it takes, and what it costs.',
+  },
+];
+
 export function ContactPage(): JSX.Element {
   return (
     <>
       <SEOHead meta={seo} />
 
       <main>
-        {/* Hero */}
-        <section className="px-6 pb-12 pt-32">
+        {/* Editorial hero */}
+        <section className="mx-auto w-full max-w-site px-6 pb-12 pt-[clamp(8.5rem,20vh,13rem)] sm:px-10">
           <AnimationWrapper variant="rise">
-            <SectionHeader
-              as="h1"
-              eyebrow="Get in touch"
-              title="Let's build something that lasts"
-            />
-            <p className="mt-6 max-w-2xl font-sans text-body-l text-mist-300">
-              Tell us what you're working on. Share as much or as little as you
-              like — we'll read every word and get back to you with a thoughtful
-              reply, not a canned one.
+            <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
+              Get in touch
+            </p>
+            <h1 className="mt-5 max-w-[18ch] font-display text-[clamp(2.5rem,8vw,7rem)] font-bold leading-[0.92] tracking-[-0.03em] text-mist-100">
+              {"Let's build something that lasts"}
+            </h1>
+            <p className="mt-8 max-w-2xl font-sans text-body-l text-mist-300">
+              Tell us what you&rsquo;re working on. Share as much or as little as
+              you like — we&rsquo;ll read every word and get back to you with a
+              thoughtful reply, not a canned one.
             </p>
           </AnimationWrapper>
         </section>
 
-        {/* Contact form (Req 13.1–13.6) */}
-        <section aria-label="Contact form" className="px-6 py-12">
-          <div className="mx-auto max-w-3xl">
+        {/* Two-column: form + "what happens next" rail (Req 13.1–13.6) */}
+        <section
+          aria-label="Contact form"
+          className="mx-auto w-full max-w-site px-6 py-[clamp(2.5rem,6vh,4.5rem)] sm:px-10"
+        >
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
             <AnimationWrapper variant="rise">
               <ContactForm />
+            </AnimationWrapper>
+
+            <AnimationWrapper variant="fade">
+              <div className="flex flex-col gap-8 lg:border-l lg:border-ink-600 lg:pl-12">
+                <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
+                  What happens next
+                </p>
+                <ol className="flex flex-col gap-8">
+                  {NEXT_STEPS.map((step, index) => (
+                    <li key={step.title} className="flex gap-4">
+                      <span
+                        aria-hidden="true"
+                        className="font-mono text-h3 font-bold leading-none text-pulse-500/40"
+                      >
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <div className="flex flex-col gap-1.5">
+                        <h2 className="font-display text-h4 text-mist-100">
+                          {step.title}
+                        </h2>
+                        <p className="font-sans text-body text-mist-300">
+                          {step.description}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </AnimationWrapper>
           </div>
         </section>
 
-        {/* Contact info */}
-        <section aria-label="Contact details" className="px-6 py-16">
-          <div className="mx-auto max-w-3xl">
+        {/* Direct-email band */}
+        <section
+          aria-label="Contact details"
+          className="border-y border-ink-600 bg-ink-800"
+        >
+          <div className="mx-auto w-full max-w-site px-6 py-[clamp(3.5rem,9vh,6rem)] sm:px-10">
             <AnimationWrapper variant="fade">
-              <div className="flex flex-col gap-3 border-t border-ink-600 pt-8">
-                <p className="font-mono text-mono-eyebrow uppercase tracking-widest text-pulse-500">
+              <div className="flex flex-col gap-4">
+                <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
                   Prefer email?
                 </p>
                 <a
                   href={`mailto:${siteMetadata.contactEmail}`}
-                  className="font-display text-h3 text-mist-100 underline underline-offset-4 hover:text-pulse-500"
+                  className="font-display text-[clamp(1.75rem,5vw,3.5rem)] font-bold leading-[0.95] tracking-[-0.02em] text-mist-100 underline-offset-4 transition-colors hover:text-pulse-500 hover:underline"
                 >
                   {siteMetadata.contactEmail}
                 </a>

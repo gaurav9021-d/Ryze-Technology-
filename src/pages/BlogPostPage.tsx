@@ -322,7 +322,7 @@ function BlogPostArticle({ post }: { post: BlogPost }): JSX.Element {
     <main id="main" className="flex flex-col gap-24 pb-24">
       <SEOHead meta={seo} />
 
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 pt-12">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 pt-[clamp(7rem,16vh,10rem)]">
         <Breadcrumb
           trail={[
             { label: 'Home', path: '/' },
@@ -333,10 +333,10 @@ function BlogPostArticle({ post }: { post: BlogPost }): JSX.Element {
 
         {/* Hero */}
         <header className="flex flex-col gap-6">
-          <p className="font-mono text-mono-eyebrow uppercase tracking-widest text-pulse-500">
+          <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
             {CATEGORY_LABELS[category]}
           </p>
-          <h1 className="max-w-4xl font-display text-display-l leading-tight text-mist-100">
+          <h1 className="max-w-[20ch] font-display text-[clamp(2.25rem,6.5vw,5rem)] font-bold leading-[0.96] tracking-[-0.03em] text-mist-100">
             {title}
           </h1>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-sm text-mist-300">

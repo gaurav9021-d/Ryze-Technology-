@@ -136,7 +136,7 @@ export function ServiceDetailPage(): JSX.Element {
   const processSteps = [...service.process].sort((a, b) => a.index - b.index);
 
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-24 px-6 py-12">
+    <main className="mx-auto flex max-w-6xl flex-col gap-24 px-6 pb-24 pt-[clamp(7rem,16vh,10rem)]">
       <SEOHead meta={service.seo} />
 
       <div className="flex flex-col gap-12">
@@ -147,11 +147,11 @@ export function ServiceDetailPage(): JSX.Element {
           <span
             data-icon={service.icon}
             aria-hidden="true"
-            className="font-mono text-mono-eyebrow uppercase tracking-widest text-pulse-500"
+            className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500"
           >
             {service.icon}
           </span>
-          <h1 className="font-display text-display-l text-mist-100">
+          <h1 className="max-w-[15ch] font-display text-[clamp(2.75rem,9vw,7.5rem)] font-bold leading-[0.92] tracking-[-0.03em] text-mist-100">
             {service.name}
           </h1>
           <p className="max-w-2xl font-sans text-body-l text-mist-300">

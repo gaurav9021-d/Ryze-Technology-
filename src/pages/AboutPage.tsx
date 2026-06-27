@@ -29,6 +29,7 @@ import { AnimationWrapper } from '@components/AnimationWrapper';
 import { team } from '@data/team';
 import { testimonials } from '@data/testimonials';
 import { siteMetadata } from '@data/siteMetadata';
+import { studioMetrics } from '@data/metrics';
 
 /** Per-route metadata. Canonical resolves to `/about` on the site origin. */
 const seo: SEOMeta = {
@@ -67,19 +68,8 @@ const DIFFERENTIATORS: Differentiator[] = [
   },
 ];
 
-/** A headline metric shown in the by-the-numbers band (Req 11.3). */
-interface Metric {
-  value: number;
-  suffix: string;
-  label: string;
-}
-
-const METRICS: Metric[] = [
-  { value: 40, suffix: '+', label: 'Products shipped' },
-  { value: 8, suffix: '', label: 'Years building software' },
-  { value: 98, suffix: '%', label: 'Client retention' },
-  { value: 12, suffix: '', label: 'Engineers and designers' },
-];
+/** Headline metrics for the by-the-numbers band (Req 11.3) — shared source of truth. */
+const METRICS = studioMetrics;
 
 /** Team members rendered in profile order (lowest `order` first). */
 const orderedTeam = [...team].sort((a, b) => a.order - b.order);

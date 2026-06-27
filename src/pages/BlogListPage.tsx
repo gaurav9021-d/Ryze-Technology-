@@ -30,7 +30,6 @@ import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import type { BlogCategory, SEOMeta } from '@app-types';
-import { SectionHeader } from '@components/SectionHeader';
 import { BlogCard } from '@components/BlogCard';
 import { CTA } from '@components/CTA';
 import { SEOHead } from '@components/SEOHead';
@@ -93,19 +92,30 @@ export function BlogListPage(): JSX.Element {
       <SEOHead meta={seo} />
 
       <main>
-        {/* Hero: eyebrow + title + count (design "/blog" hero). */}
-        <section className="px-6 pb-12 pt-32">
+        {/* Hero: eyebrow + oversized title + lead + count. */}
+        <section className="mx-auto w-full max-w-site px-6 pb-12 pt-[clamp(8.5rem,20vh,13rem)] sm:px-10">
           <AnimationWrapper variant="rise">
-            <SectionHeader as="h1" eyebrow="Blog" title="Blog" />
-            <p className="mt-6 font-mono text-mono-eyebrow uppercase tracking-widest text-mist-300">
-              {filtered.length}{' '}
-              {filtered.length === 1 ? 'article' : 'articles'}
+            <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
+              Field notes
             </p>
+            <h1 className="mt-5 font-display text-[clamp(2.75rem,9vw,8rem)] font-bold leading-[0.92] tracking-[-0.03em] text-mist-100">
+              Blog
+            </h1>
+            <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
+              <p className="max-w-xl font-sans text-body-l text-mist-300">
+                Lessons from the studio — how we engineer, design, and ship
+                software that keeps working long after launch.
+              </p>
+              <p className="font-mono text-mono-eyebrow uppercase tracking-[0.2em] text-mist-300">
+                {filtered.length}{' '}
+                {filtered.length === 1 ? 'article' : 'articles'}
+              </p>
+            </div>
           </AnimationWrapper>
         </section>
 
         {/* Category filter with animated active indicator (Req 14.2). */}
-        <section className="px-6 pb-12">
+        <section className="mx-auto w-full max-w-site px-6 pb-12 sm:px-10">
           <div
             role="group"
             aria-label="Filter posts by category"
@@ -145,7 +155,7 @@ export function BlogListPage(): JSX.Element {
         </section>
 
         {/* Responsive blog-post grid (Req 14.1). Reflows on filter/page change. */}
-        <section aria-labelledby="blog-grid-heading" className="px-6 pb-12">
+        <section aria-labelledby="blog-grid-heading" className="mx-auto w-full max-w-site px-6 pb-12 sm:px-10">
           <h2 id="blog-grid-heading" className="sr-only">
             Articles
           </h2>
@@ -171,7 +181,7 @@ export function BlogListPage(): JSX.Element {
         </section>
 
         {/* Pagination controls (Req 14.4, 14.5). Prev/next reflect hasPrev/hasNext. */}
-        <nav aria-label="Pagination" className="px-6 pb-24">
+        <nav aria-label="Pagination" className="mx-auto w-full max-w-site px-6 pb-24 sm:px-10">
           <div className="flex items-center justify-center gap-4">
             <button
               type="button"

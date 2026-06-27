@@ -125,7 +125,7 @@ export function Hero({ headline, eyebrow }: HeroProps): JSX.Element {
 
   return (
     <section
-      className="relative flex min-h-screen w-full items-center overflow-hidden bg-ink-900"
+      className="relative flex min-h-[100dvh] w-full items-center overflow-hidden bg-ink-900 [min-height:100vh]"
       aria-label="Intro"
     >
       {/* Background layers live inside the observed ref. */}
