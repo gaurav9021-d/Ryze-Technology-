@@ -39,18 +39,16 @@ import { AnimatedCounter } from '@components/AnimatedCounter';
 import { AnimationWrapper } from '@components/AnimationWrapper';
 import { FeaturedWork } from '@components/FeaturedWork';
 import { ProcessTimeline } from '@components/ProcessTimeline';
-import { CapabilitiesShowcase } from '@components/CapabilitiesShowcase';
+import { CapabilitiesShowcase, type Capability } from '@components/CapabilitiesShowcase';
 import { CTA } from '@components/CTA';
 import { Hero } from '@components/Hero';
 import { MarqueeText } from '@components/MarqueeText';
 import { SectionHeader } from '@components/SectionHeader';
-import { ServiceCard } from '@components/ServiceCard';
 import { SplitText } from '@components/SplitText';
 import { TeamCard } from '@components/TeamCard';
 import { SEOHead } from '@components/SEOHead';
 
 import { caseStudies } from '@data/caseStudies';
-import { services } from '@data/services';
 import { team } from '@data/team';
 import { testimonials } from '@data/testimonials';
 import { siteMetadata } from '@data/siteMetadata';
@@ -124,6 +122,44 @@ const PROBLEMS: ReadonlyArray<{ title: string; detail: string }> = [
 
 /** "Why Us" metrics — sourced from the shared studio metrics (single source of truth). */
 const METRICS = studioMetrics.slice(0, 3);
+
+/**
+ * The disciplines shown in the pinned "What we build" showcase. These are the
+ * technical capabilities (each with its own animated scene), authored
+ * independently of the service catalogue so the showcase scenes stay stable.
+ */
+const CAPABILITIES: ReadonlyArray<Capability> = [
+  {
+    kind: 'websites',
+    name: 'Web Platforms',
+    tagline: 'Fast, accessible websites, storefronts, and web apps that convert.',
+    techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind'],
+  },
+  {
+    kind: 'mobile-apps',
+    name: 'Mobile Apps',
+    tagline: 'Native-quality iOS and Android apps from one codebase.',
+    techStack: ['React Native', 'Expo', 'TypeScript', 'SQLite'],
+  },
+  {
+    kind: 'desktop',
+    name: 'Dashboards & Systems',
+    tagline: 'Admin panels, dashboards, and the back-end systems that run a business.',
+    techStack: ['Node.js', 'PostgreSQL', 'Prisma', 'Redis'],
+  },
+  {
+    kind: 'business-systems',
+    name: 'Automation & APIs',
+    tagline: 'Workflow automation and integrations that remove manual busywork.',
+    techStack: ['APIs', 'Webhooks', 'Automation', 'Integrations'],
+  },
+  {
+    kind: 'social-media-marketing',
+    name: 'Digital Marketing',
+    tagline: 'SEO, social, ads, and campaigns that turn attention into customers.',
+    techStack: ['SEO', 'Social', 'Ads', 'Analytics'],
+  },
+];
 
 /** What sets the studio apart — the differentiator list under the metrics. */
 const DIFFERENTIATORS: ReadonlyArray<string> = [
@@ -236,25 +272,10 @@ export function HomePage(): JSX.Element {
       </section>
 
       {/* What we build — pinned horizontal-scroll capabilities showcase. */}
-      <CapabilitiesShowcase services={services} />
+      <CapabilitiesShowcase capabilities={[...CAPABILITIES]} />
 
       {/* 4 — Portfolio preview: featured case studies only (Requirement 6.2). */}
       <FeaturedWork caseStudies={featuredCaseStudies} />
-
-      {/* 5 — Services: the four service cards. */}
-      <section
-        aria-label="Services"
-        className="mx-auto w-full max-w-site px-6 py-[clamp(6rem,14vh,11rem)] sm:px-10"
-      >
-        <SectionHeader eyebrow="What we do" title="Four ways we build" />
-        <AnimationWrapper variant="rise" stagger={0.08}>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((service, index) => (
-              <ServiceCard key={service.slug} service={service} index={index} />
-            ))}
-          </div>
-        </AnimationWrapper>
-      </section>
 
       {/* How we work — process band with a scroll-drawn progress line. */}
       <ProcessTimeline steps={PROCESS_STEPS} />

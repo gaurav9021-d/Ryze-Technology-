@@ -1,317 +1,197 @@
 // Service offerings for Ryze Technology.
 // See design.md "Data Models" + "/services/:slug — Service Detail".
 // Invariants: slugs unique (req 29.3); process step indices contiguous 1..n (req 29.4).
+//
+// Five service categories, each surfacing its concrete offerings as `features`.
 
 import type { Service } from '@app-types';
 
 export const services: Service[] = [
   {
-    slug: 'websites',
-    name: 'Websites',
-    tagline: 'Fast, accessible sites that earn attention and convert it.',
-    icon: 'globe',
+    slug: 'development',
+    name: 'Development',
+    tagline: 'Custom software engineered to work for years, not weeks.',
+    icon: 'code',
     order: 1,
     summary:
-      'Marketing sites, storefronts, and web apps engineered for speed, accessibility, and measurable results.',
+      'Web apps, mobile apps, websites, e-commerce, dashboards, and the APIs and databases that power them.',
     whatWeDo:
-      'We design and build websites from the strategy down to the last animation. That means a clear information architecture, a reusable design system, server-rendered performance, and accessibility baked in from the first commit, not bolted on before launch.',
+      'We design and engineer the software your business runs on — from marketing sites and storefronts to custom web and mobile applications, internal dashboards, and the back-end systems behind them. Everything is built performance-first, accessible, and maintainable so it keeps working long after launch.',
     features: [
-      {
-        title: 'Performance-first builds',
-        description: 'Sub-second loads with server rendering, image discipline, and tight bundle budgets.',
-      },
-      {
-        title: 'Accessible by default',
-        description: 'WCAG AA contrast, keyboard support, and screen-reader semantics on every component.',
-      },
-      {
-        title: 'Design systems',
-        description: 'A token-driven component library so your site stays consistent as it grows.',
-      },
-      {
-        title: 'Headless commerce',
-        description: 'Storefronts and checkout flows that handle real traffic without slowing down.',
-      },
-      {
-        title: 'SEO foundations',
-        description: 'Clean metadata, structured data, and canonical URLs that search engines trust.',
-      },
-      {
-        title: 'Analytics & experiments',
-        description: 'Event tracking and A/B testing wired in so you can iterate on evidence.',
-      },
+      { title: 'Custom Web Application Development', description: 'Tailored web apps built around your exact workflows and users.' },
+      { title: 'Mobile App Development', description: 'Native-quality iOS and Android apps from a single codebase.' },
+      { title: 'Business Websites', description: 'Fast, accessible marketing sites that earn attention and convert it.' },
+      { title: 'E-commerce Development', description: 'Storefronts and checkout flows that handle real traffic and scale.' },
+      { title: 'Admin Panels & Dashboards', description: 'Live operational views and control panels your team checks every day.' },
+      { title: 'Booking & Scheduling Systems', description: 'Reservations, appointments, and scheduling with reminders and payments.' },
+      { title: 'API Development & Integration', description: 'Clean, documented APIs and integrations that connect your tools.' },
+      { title: 'Backend & Database Systems', description: 'Reliable servers, data models, and infrastructure built to scale.' },
     ],
-    techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel'],
+    techStack: ['React', 'Next.js', 'React Native', 'TypeScript', 'Node.js', 'PostgreSQL'],
     process: [
-      { index: 1, title: 'Discovery', description: 'We map your goals, audience, and content to a clear project scope.' },
-      { index: 2, title: 'Design', description: 'We craft a design system and key page layouts you can react to early.' },
-      { index: 3, title: 'Build', description: 'We engineer the site in vertical slices, shipping working pages as we go.' },
+      { index: 1, title: 'Discovery', description: 'We map your goals, users, and constraints into a clear scope.' },
+      { index: 2, title: 'Design', description: 'We shape the system and key flows so you react to something real early.' },
+      { index: 3, title: 'Build', description: 'We engineer in vertical slices, shipping working software continuously.' },
       { index: 4, title: 'Launch', description: 'We test, optimize, and deploy with monitoring and rollback in place.' },
       { index: 5, title: 'Iterate', description: 'We measure real usage and refine based on what the data shows.' },
     ],
     faqs: [
-      {
-        question: 'How long does a website project take?',
-        answer: 'Most marketing sites ship in six to ten weeks. Storefronts and web apps take longer depending on scope, and we agree on a timeline during discovery.',
-      },
-      {
-        question: 'Do you redesign existing sites or only build new ones?',
-        answer: 'Both. We frequently rebuild aging sites on a modern stack while preserving your content, SEO equity, and brand.',
-      },
-      {
-        question: 'Can we update content ourselves after launch?',
-        answer: 'Yes. We integrate a headless CMS so your team can edit pages, posts, and products without touching code.',
-      },
-      {
-        question: 'Will the site work well on mobile?',
-        answer: 'Every site we build is responsive and tested across phones, tablets, and desktops as a baseline, not an add-on.',
-      },
-      {
-        question: 'Do you handle hosting and maintenance?',
-        answer: 'We can deploy to your infrastructure or a managed platform, and we offer ongoing maintenance to keep things fast and secure.',
-      },
-      {
-        question: 'How do you ensure the site is accessible?',
-        answer: 'We build to WCAG AA, test with keyboard and screen readers, and run automated accessibility checks in our pipeline.',
-      },
+      { question: 'Can you build both the website and the mobile app?', answer: 'Yes. We deliver web, mobile, and the shared backend together, so everything stays in sync on the same data.' },
+      { question: 'Do you take over existing projects?', answer: 'We do. We can stabilize an existing codebase, fix what is broken, and extend it with new features.' },
+      { question: 'How long does a typical project take?', answer: 'Most websites ship in six to ten weeks; apps and custom systems take longer depending on scope. We agree on a timeline during discovery.' },
+      { question: 'Will we be able to maintain it afterwards?', answer: 'Yes. We write documented, maintainable code, and we offer ongoing maintenance plans if you would rather we keep it running.' },
     ],
-    relatedCaseStudySlugs: ['orange-city-grocers'],
     seo: {
-      title: 'Website Design & Development',
-      description: 'Fast, accessible websites, storefronts, and web apps engineered for performance and conversion.',
-      canonical: 'https://ryze.technology/services/websites',
+      title: 'Software Development',
+      description: 'Custom web and mobile app development, business websites, e-commerce, dashboards, APIs, and backend systems.',
+      canonical: 'https://ryze.technology/services/development',
     },
   },
   {
-    slug: 'mobile-apps',
-    name: 'Mobile Apps',
-    tagline: 'Native-quality apps that feel right in the hand.',
-    icon: 'smartphone',
+    slug: 'design',
+    name: 'Design',
+    tagline: 'Interfaces and brand work people actually enjoy using.',
+    icon: 'palette',
     order: 2,
     summary:
-      'iOS and Android apps built from one codebase, tuned for real devices, real networks, and real users.',
+      'UI/UX, branding, wireframing and prototyping, website redesigns, marketing creatives, and design systems.',
     whatWeDo:
-      'We build cross-platform mobile apps that feel native on every device. From offline-first data layers to smooth gestures and push notifications, we focus on the details that make an app feel trustworthy and fast even on a weak connection.',
+      'We turn ideas and requirements into clear, confident design — from brand identity and logos to product UI/UX, prototypes, and the design systems that keep everything consistent as you grow. We design for real use: accessible, on-brand, and ready to build.',
     features: [
-      {
-        title: 'Cross-platform delivery',
-        description: 'One React Native codebase ships to both iOS and Android without cutting corners.',
-      },
-      {
-        title: 'Offline-first data',
-        description: 'Local storage and background sync so the app works with no signal and reconciles cleanly.',
-      },
-      {
-        title: 'Native integrations',
-        description: 'Camera, location, biometrics, and notifications wired in with platform best practices.',
-      },
-      {
-        title: 'Fluid motion',
-        description: 'Gestures and transitions that run at 60fps and respect reduced-motion settings.',
-      },
-      {
-        title: 'Secure by design',
-        description: 'Encrypted storage, secure auth, and careful handling of sensitive data.',
-      },
-      {
-        title: 'Store-ready releases',
-        description: 'We manage builds, signing, and submission to the App Store and Play Store.',
-      },
+      { title: 'UI/UX Design', description: 'Intuitive product interfaces grounded in how people actually work.' },
+      { title: 'Branding & Logo Design', description: 'Distinct brand identities and logos that scale across every surface.' },
+      { title: 'Wireframing & Prototyping', description: 'Interactive prototypes that validate flows before a line of code.' },
+      { title: 'Website Redesign', description: 'Modern redesigns that lift clarity, speed, and conversion.' },
+      { title: 'Marketing Creatives', description: 'Social media posts, ads, and banners that stay on-brand.' },
+      { title: 'Design Systems', description: 'Token-driven component libraries for consistency at scale.' },
     ],
-    techStack: ['React Native', 'Expo', 'TypeScript', 'SQLite', 'WatermelonDB', 'Node.js'],
+    techStack: ['Figma', 'Design Tokens', 'Prototyping', 'Accessibility', 'Brand', 'Illustration'],
     process: [
-      { index: 1, title: 'Discovery', description: 'We define the core jobs your app must do and the devices it must serve.' },
-      { index: 2, title: 'Prototype', description: 'We build an interactive prototype to validate flows before full engineering.' },
-      { index: 3, title: 'Build', description: 'We develop features in slices with real-device testing throughout.' },
-      { index: 4, title: 'Beta', description: 'We run a beta with real users, gather feedback, and harden the app.' },
-      { index: 5, title: 'Release', description: 'We submit to the stores and support a smooth public launch.' },
-      { index: 6, title: 'Support', description: 'We monitor crashes and usage, then ship updates that keep the app healthy.' },
+      { index: 1, title: 'Discover', description: 'We learn your brand, audience, and goals before designing anything.' },
+      { index: 2, title: 'Explore', description: 'We sketch directions and align on a clear visual language.' },
+      { index: 3, title: 'Design', description: 'We craft high-fidelity screens, brand assets, and prototypes.' },
+      { index: 4, title: 'Handoff', description: 'We deliver a documented system the build team can use directly.' },
     ],
     faqs: [
-      {
-        question: 'Do you build separate apps for iOS and Android?',
-        answer: 'We build a single React Native codebase that ships to both platforms, which keeps cost down and feature parity high while still feeling native.',
-      },
-      {
-        question: 'Can the app work without an internet connection?',
-        answer: 'Yes. We specialize in offline-first apps that store data locally and sync automatically once a connection returns.',
-      },
-      {
-        question: 'Will you handle App Store and Play Store submission?',
-        answer: 'We manage builds, code signing, store listings, and the review process so your launch goes smoothly.',
-      },
-      {
-        question: 'How do you keep user data secure?',
-        answer: 'We use encrypted local storage, secure authentication, and careful permission handling, and we follow each platform\u2019s privacy guidelines.',
-      },
-      {
-        question: 'Can you add to or fix an app we already have?',
-        answer: 'Yes. We can take over an existing codebase, stabilize it, and extend it with new features.',
-      },
-      {
-        question: 'How do you test on real devices?',
-        answer: 'We test across a range of physical phones and tablets, plus simulators, and run a beta program before release.',
-      },
+      { question: 'Do you design and build, or design only?', answer: 'Both. We can hand off polished designs to your team, or design and engineer the product end to end.' },
+      { question: 'Can you refresh our brand without a full rebrand?', answer: 'Yes. We can evolve your existing identity or create a brand new one, depending on what the business needs.' },
+      { question: 'Do you provide social media and ad creatives?', answer: 'We design marketing creatives — social posts, ads, and banners — that match your brand system.' },
+      { question: 'Will the design be accessible?', answer: 'Accessibility is built in: we design to WCAG AA contrast and usable, keyboard-friendly patterns from the start.' },
     ],
-    relatedCaseStudySlugs: ['mednudge-care-companion'],
     seo: {
-      title: 'Mobile App Development',
-      description: 'Cross-platform iOS and Android apps with offline-first data and native-quality performance.',
-      canonical: 'https://ryze.technology/services/mobile-apps',
+      title: 'Design Services',
+      description: 'UI/UX design, branding and logo design, wireframing, website redesigns, marketing creatives, and design systems.',
+      canonical: 'https://ryze.technology/services/design',
     },
   },
   {
-    slug: 'desktop',
-    name: 'Desktop Software',
-    tagline: 'Powerful desktop tools for work that lives on the big screen.',
-    icon: 'monitor',
+    slug: 'digital-marketing',
+    name: 'Digital Marketing',
+    tagline: 'Turn attention into customers across every channel.',
+    icon: 'megaphone',
     order: 3,
     summary:
-      'Cross-platform desktop applications for teams whose work demands more than a browser tab.',
+      'SEO, social media marketing, paid ads, content, WhatsApp and email marketing, and local SEO.',
     whatWeDo:
-      'We build desktop software for control rooms, studios, and operations teams that need keyboard-driven speed, multi-monitor layouts, and access to local hardware. We bring web engineering ergonomics to native desktop without sacrificing performance.',
+      'We help people find you and choose you. From search and local SEO to social media, paid ads, content, and messaging campaigns, we build a marketing engine that grows your audience and turns it into real business — measured, not guessed.',
     features: [
-      {
-        title: 'Cross-platform desktop',
-        description: 'One codebase that runs natively on Windows, macOS, and Linux.',
-      },
-      {
-        title: 'Multi-monitor layouts',
-        description: 'Dense, configurable workspaces designed for people who live on several screens.',
-      },
-      {
-        title: 'Local hardware access',
-        description: 'Printers, scanners, serial devices, and the file system integrated directly.',
-      },
-      {
-        title: 'Offline capability',
-        description: 'Full functionality without a network, with sync when connectivity returns.',
-      },
-      {
-        title: 'Keyboard-first speed',
-        description: 'Shortcuts and command palettes built for high-volume daily operators.',
-      },
-      {
-        title: 'Auto-updates',
-        description: 'Signed, background updates so every workstation stays current and secure.',
-      },
+      { title: 'Search Engine Optimization (SEO)', description: 'Technical and content SEO that earns durable organic traffic.' },
+      { title: 'Social Media Marketing', description: 'Instagram, Facebook, and LinkedIn content and community that grows your brand.' },
+      { title: 'Paid Ads', description: 'Google Ads and Meta Ads campaigns tuned for return on spend.' },
+      { title: 'Content Marketing', description: 'Articles, assets, and campaigns that attract and convert.' },
+      { title: 'WhatsApp Marketing', description: 'Broadcast and automation flows that reach customers where they are.' },
+      { title: 'Email Marketing', description: 'Lifecycle and campaign emails that nurture and retain.' },
+      { title: 'Local SEO', description: 'Google Business Profile and local visibility that drives footfall.' },
     ],
-    techStack: ['Electron', 'React', 'TypeScript', 'Node.js', 'SQLite', 'Rust'],
+    techStack: ['SEO', 'Google Ads', 'Meta Ads', 'Analytics', 'Email', 'WhatsApp API'],
     process: [
-      { index: 1, title: 'Discovery', description: 'We study the daily workflow and the hardware your team relies on.' },
-      { index: 2, title: 'Design', description: 'We design dense, efficient layouts tailored to multi-monitor use.' },
-      { index: 3, title: 'Build', description: 'We engineer the app with local-first data and native integrations.' },
-      { index: 4, title: 'Rollout', description: 'We package signed installers and deploy across your workstations.' },
-      { index: 5, title: 'Maintain', description: 'We ship auto-updates and respond to the needs of power users.' },
+      { index: 1, title: 'Audit', description: 'We assess your current presence, channels, and competitors.' },
+      { index: 2, title: 'Strategy', description: 'We pick the channels and messages with the best return for you.' },
+      { index: 3, title: 'Launch', description: 'We set up campaigns, content, and tracking, then go live.' },
+      { index: 4, title: 'Optimize', description: 'We read the data weekly and double down on what works.' },
     ],
     faqs: [
-      {
-        question: 'Why build a desktop app instead of a website?',
-        answer: 'Desktop apps win when you need deep hardware access, dense multi-monitor layouts, guaranteed offline use, or keyboard-driven speed for all-day operators.',
-      },
-      {
-        question: 'Which operating systems do you support?',
-        answer: 'We target Windows, macOS, and Linux from a single codebase, and we can prioritize the platforms your team actually uses.',
-      },
-      {
-        question: 'Can the app connect to local devices and printers?',
-        answer: 'Yes. We integrate printers, scanners, serial hardware, and the local file system directly into the application.',
-      },
-      {
-        question: 'How are updates delivered?',
-        answer: 'We ship signed auto-updates that install in the background, so every workstation stays current without manual reinstalls.',
-      },
-      {
-        question: 'Does the desktop app work offline?',
-        answer: 'Yes. We design for full offline functionality with a local data store that syncs once a connection is available.',
-      },
-      {
-        question: 'Can it share a backend with our web or mobile apps?',
-        answer: 'Absolutely. We commonly build a shared backend so desktop, web, and mobile stay in sync on the same data.',
-      },
+      { question: 'How soon will we see results?', answer: 'Paid ads can drive traffic immediately; SEO and content compound over months. We set realistic expectations per channel up front.' },
+      { question: 'Do you manage the ad budget too?', answer: 'Yes. We plan, run, and optimize Google and Meta ad spend, and report on return clearly.' },
+      { question: 'Can you handle our social media day to day?', answer: 'We offer ongoing social media management — content, scheduling, and community engagement.' },
+      { question: 'How do you measure success?', answer: 'We track the metrics that matter — leads, conversions, and revenue — not just likes, and report on them transparently.' },
     ],
-    relatedCaseStudySlugs: ['vidarbha-logistics-hub'],
     seo: {
-      title: 'Desktop Software Development',
-      description: 'Cross-platform desktop applications with multi-monitor layouts, hardware access, and offline support.',
-      canonical: 'https://ryze.technology/services/desktop',
+      title: 'Digital Marketing',
+      description: 'SEO, social media marketing, paid ads, content, WhatsApp, email, and local SEO that grow your business.',
+      canonical: 'https://ryze.technology/services/digital-marketing',
     },
   },
   {
-    slug: 'business-systems',
-    name: 'Business Systems',
-    tagline: 'Custom platforms that replace spreadsheets and busywork.',
-    icon: 'workflow',
+    slug: 'sales-strategy',
+    name: 'Sales & Strategy',
+    tagline: 'A system for finding, converting, and keeping customers.',
+    icon: 'target',
     order: 4,
     summary:
-      'Internal tools, dashboards, and automation that turn manual operations into a single source of truth.',
+      'Lead generation, sales funnel setup, CRM setup and consulting, and business consulting.',
     whatWeDo:
-      'We build the systems that run a business: dashboards, admin panels, workflow automation, and integrations. We start by mapping how work actually flows today, then replace the spreadsheets and manual handoffs with one reliable platform your team trusts.',
+      'We help you build a repeatable engine for growth — generating qualified leads, designing sales funnels that convert, setting up the CRM that keeps it all organized, and advising on the strategy that ties it together.',
     features: [
-      {
-        title: 'Custom dashboards',
-        description: 'Live operational views that surface the numbers your team checks every day.',
-      },
-      {
-        title: 'Workflow automation',
-        description: 'Approvals, notifications, and scheduled jobs that remove repetitive manual steps.',
-      },
-      {
-        title: 'Role-based access',
-        description: 'Fine-grained permissions so the right people see and change the right things.',
-      },
-      {
-        title: 'Integrations',
-        description: 'Connections to your accounting, CRM, and payment tools so data stays in sync.',
-      },
-      {
-        title: 'Reporting & exports',
-        description: 'Reliable reports and exports that replace fragile spreadsheet formulas.',
-      },
-      {
-        title: 'Audit trails',
-        description: 'A clear record of who changed what and when, for accountability and compliance.',
-      },
+      { title: 'Lead Generation', description: 'Targeted campaigns and funnels that fill your pipeline with qualified leads.' },
+      { title: 'Sales Funnel Setup', description: 'End-to-end funnels that move prospects from interest to purchase.' },
+      { title: 'CRM Setup & Consulting', description: 'The right CRM configured to your process, with your team trained on it.' },
+      { title: 'Business Consulting', description: 'Practical strategy to align product, marketing, and sales for growth.' },
     ],
-    techStack: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Prisma', 'Redis', 'WebSocket'],
+    techStack: ['CRM', 'Funnels', 'Automation', 'Analytics', 'Lead Gen', 'Strategy'],
     process: [
-      { index: 1, title: 'Discovery', description: 'We map your current workflows and find where time and accuracy are lost.' },
-      { index: 2, title: 'Blueprint', description: 'We model the data and design the system around how your team really works.' },
-      { index: 3, title: 'Build', description: 'We deliver modules incrementally so value lands early and often.' },
-      { index: 4, title: 'Migrate', description: 'We move your existing data in safely and train the team on the new system.' },
-      { index: 5, title: 'Optimize', description: 'We refine workflows and reporting as your operations evolve.' },
+      { index: 1, title: 'Assess', description: 'We map your current funnel, tools, and where leads are lost.' },
+      { index: 2, title: 'Design', description: 'We design the funnel, CRM, and follow-up that fit your business.' },
+      { index: 3, title: 'Implement', description: 'We set up the tools, automations, and tracking, then train your team.' },
+      { index: 4, title: 'Refine', description: 'We review the numbers and tune the funnel for higher conversion.' },
     ],
     faqs: [
-      {
-        question: 'We run everything on spreadsheets today. Where do we start?',
-        answer: 'We start by mapping your real workflows, then replace the most error-prone spreadsheets first so you see value quickly without a risky big-bang switch.',
-      },
-      {
-        question: 'Can the system integrate with our existing tools?',
-        answer: 'Yes. We connect to accounting, CRM, payment, and other tools so data flows automatically instead of being re-keyed.',
-      },
-      {
-        question: 'How do you control who can access what?',
-        answer: 'We build role-based access with fine-grained permissions and audit trails, so people only see and change what their role allows.',
-      },
-      {
-        question: 'Will you migrate our existing data?',
-        answer: 'We plan and run the data migration carefully, validate it against your records, and keep your old data available during the transition.',
-      },
-      {
-        question: 'Can the system grow as our business changes?',
-        answer: 'Yes. We build modular systems so new workflows, reports, and integrations can be added without a rebuild.',
-      },
-      {
-        question: 'How do you keep our operational data safe?',
-        answer: 'We use secure authentication, encrypted storage, regular backups, and audit logging to protect your data and recover from mistakes.',
-      },
+      { question: 'Which CRM do you recommend?', answer: 'We recommend the CRM that fits your size and process rather than a one-size-fits-all tool, and we configure it around how you actually sell.' },
+      { question: 'Can you generate leads for our business?', answer: 'Yes. We build lead-generation campaigns and funnels tailored to your audience and offer.' },
+      { question: 'Do you only consult, or do you implement too?', answer: 'Both. We can advise on strategy and also set up the funnels, automations, and CRM ourselves.' },
+      { question: 'Will this integrate with our website and marketing?', answer: 'Yes. We connect your funnel and CRM to your site, ads, and marketing so everything works as one system.' },
     ],
-    relatedCaseStudySlugs: ['vidarbha-logistics-hub', 'orange-city-grocers'],
     seo: {
-      title: 'Business Systems & Internal Tools',
-      description: 'Custom dashboards, workflow automation, and integrations that replace spreadsheets with one source of truth.',
-      canonical: 'https://ryze.technology/services/business-systems',
+      title: 'Sales & Strategy',
+      description: 'Lead generation, sales funnel setup, CRM setup and consulting, and business consulting for growth.',
+      canonical: 'https://ryze.technology/services/sales-strategy',
+    },
+  },
+  {
+    slug: 'maintenance-support',
+    name: 'Maintenance & Support',
+    tagline: 'We stay after launch, because durable means supported.',
+    icon: 'wrench',
+    order: 5,
+    summary:
+      'Maintenance plans, updates, 24/7 support, performance optimization, hosting, and annual contracts.',
+    whatWeDo:
+      'Shipping is the start, not the finish. We keep your website, app, and systems fast, secure, and up to date — with proactive maintenance, performance tuning, hosting and server management, and support that is there when you need it.',
+    features: [
+      { title: 'Website Maintenance Plans', description: 'Ongoing updates, fixes, and improvements that keep your site healthy.' },
+      { title: 'App Maintenance & Updates', description: 'OS-compatibility updates, fixes, and new features for your apps.' },
+      { title: '24/7 Technical Support', description: 'Help when you need it, so issues never sit unattended.' },
+      { title: 'Performance Optimization', description: 'Speed, reliability, and Core Web Vitals tuning on a schedule.' },
+      { title: 'Hosting & Server Management', description: 'Managed hosting, monitoring, backups, and security patching.' },
+      { title: 'Annual Maintenance Contracts (AMC)', description: 'Predictable, all-in plans that cover everything above for the year.' },
+    ],
+    techStack: ['Monitoring', 'CI/CD', 'Hosting', 'Backups', 'Security', 'Performance'],
+    process: [
+      { index: 1, title: 'Onboard', description: 'We audit your stack and set up monitoring, backups, and access.' },
+      { index: 2, title: 'Stabilize', description: 'We fix outstanding issues and harden the most fragile parts first.' },
+      { index: 3, title: 'Maintain', description: 'We apply updates, patches, and optimizations on a regular cadence.' },
+      { index: 4, title: 'Support', description: 'We respond to issues and report on health, uptime, and performance.' },
+    ],
+    faqs: [
+      { question: 'Do you maintain sites and apps you did not build?', answer: 'Yes. We can take over an existing website or app, get it stable, and keep it maintained.' },
+      { question: 'What does an AMC include?', answer: 'An Annual Maintenance Contract bundles updates, fixes, performance tuning, hosting management, and support into one predictable plan.' },
+      { question: 'How fast do you respond to issues?', answer: 'Response times depend on your plan; our support tiers include options up to 24/7 coverage for critical systems.' },
+      { question: 'Can you manage our hosting and backups?', answer: 'Yes. We offer managed hosting with monitoring, automated backups, and security patching.' },
+    ],
+    seo: {
+      title: 'Maintenance & Support',
+      description: 'Website and app maintenance, 24/7 support, performance optimization, hosting, and annual maintenance contracts.',
+      canonical: 'https://ryze.technology/services/maintenance-support',
     },
   },
 ];

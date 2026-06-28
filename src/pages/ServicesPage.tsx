@@ -83,7 +83,7 @@ const APPROACH_STATS: ReadonlyArray<{
   decimals?: number;
   label: string;
 }> = [
-  { value: 4, label: 'Core disciplines' },
+  { value: 5, label: 'Service categories' },
   { value: 100, suffix: '%', label: 'In-house engineering' },
   { value: 2, suffix: ' wk', label: 'To first working slice' },
   { value: 99.9, suffix: '%', decimals: 1, label: 'Uptime we hold' },
@@ -136,7 +136,7 @@ export function ServicesPage(): JSX.Element {
             Services
           </h2>
           <AnimationWrapper variant="rise" stagger={0.08}>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {services.map((service, index) => (
                 <ServiceCard
                   key={service.slug}
