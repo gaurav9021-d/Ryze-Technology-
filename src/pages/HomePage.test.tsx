@@ -85,7 +85,6 @@ describe('HomePage', () => {
       'Problems',
       'Philosophy',
       'Featured work', // Portfolio preview
-      'Services',
       'Why Ryze', // Why Us
       'Team',
     ];

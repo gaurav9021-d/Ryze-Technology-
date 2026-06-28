@@ -44,13 +44,11 @@ import { CTA } from '@components/CTA';
 import { Hero } from '@components/Hero';
 import { MarqueeText } from '@components/MarqueeText';
 import { SectionHeader } from '@components/SectionHeader';
-import { ServiceCard } from '@components/ServiceCard';
 import { SplitText } from '@components/SplitText';
 import { TeamCard } from '@components/TeamCard';
 import { SEOHead } from '@components/SEOHead';
 
 import { caseStudies } from '@data/caseStudies';
-import { services } from '@data/services';
 import { team } from '@data/team';
 import { testimonials } from '@data/testimonials';
 import { siteMetadata } from '@data/siteMetadata';
@@ -203,123 +201,84 @@ export function HomePage(): JSX.Element {
           </div>
         </div>
 
-        {/* 2 — Problems */}
-        <section
-          aria-label="Problems"
-          className="section-glow mx-auto w-full max-w-site px-6 py-[clamp(6rem,14vh,11rem)] sm:px-10"
-        >
-          <div className="grid gap-x-12 gap-y-14 lg:grid-cols-[0.85fr_1.15fr]">
-            <div className="lg:sticky lg:top-28 lg:self-start">
-              <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
-                The problem
-              </p>
-              <SplitText
-                as="h2"
-                by="word"
-                text="Software that rots"
-                className="mt-6 max-w-[12ch] font-display text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[0.95] tracking-[-0.02em] text-mist-100"
-              />
-              <p className="mt-6 max-w-xs font-sans text-body text-mist-300 leading-relaxed">
-                Most software is built for the demo, not for the decade. We fix that.
-              </p>
-            </div>
-
-            <AnimationWrapper variant="rise" stagger={0.12}>
-              <ul className="flex flex-col">
-                {PROBLEMS.map((problem, index) => (
-                  <li
-                    key={problem.title}
-                    className="group grid grid-cols-[auto_1fr] items-start gap-6 border-t border-ink-600 py-8 transition-all duration-300"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="ghost-numeral text-[clamp(2.5rem,6vw,4.5rem)] transition-colors duration-300 group-hover:text-pulse-500"
-                    >
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <div className="flex flex-col gap-3 pt-1">
-                      <h3 className="font-display text-h3 font-semibold text-mist-100">
-                        <span className="relative inline-block">
-                          {problem.title}
-                          <span
-                            className="absolute left-0 top-1/2 h-[2px] w-0 bg-pulse-500 transition-all duration-300 ease-out group-hover:w-full"
-                            aria-hidden="true"
-                          />
-                        </span>
-                      </h3>
-                      <p className="max-w-md font-sans text-body text-mist-300 leading-relaxed">
-                        {problem.detail}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </AnimationWrapper>
-          </div>
-        </section>
-
-        {/* 3 — Philosophy: full-bleed inverted brand-blue statement */}
-        <section
-          aria-label="Philosophy"
-          className="bg-pulse-500 text-ink-900"
-        >
-          <div className="mx-auto w-full max-w-site px-6 py-[clamp(6rem,16vh,12rem)] sm:px-10">
-            <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-ink-900/70">
-              Our philosophy
+      {/* 2 — Problems: "software that rots". */}
+      <section
+        aria-label="Problems"
+        className="mx-auto w-full max-w-site px-6 py-[clamp(6rem,14vh,11rem)] sm:px-10"
+      >
+        <div className="grid gap-x-12 gap-y-14 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-pulse-500">
+              The problem
             </p>
-            <AnimationWrapper variant="rise">
-              <SplitText
-                as="h2"
-                by="word"
-                text="Most software is built to ship. We build it to last."
-                className="mt-8 max-w-[18ch] font-display text-[clamp(2.5rem,7vw,6.5rem)] font-bold leading-[0.95] tracking-[-0.02em] text-ink-900"
-              />
-            </AnimationWrapper>
-            <AnimationWrapper variant="fade" delay={0.1}>
-              <p className="mt-10 max-w-xl font-sans text-body-l leading-relaxed text-ink-900/80">
-                Anything worth building is worth building to last. We make order
-                that holds — structured, tested, and maintainable — so the
-                products we ship keep working long after launch day.
-              </p>
-              <div className="mt-10">
-                <a
-                  href="/manifesto"
-                  data-cursor="link"
-                  className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-ink-900 transition-opacity hover:opacity-70"
+            <SplitText
+              as="h2"
+              by="word"
+              text="Software that rots"
+              className="mt-6 max-w-[12ch] font-display text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[0.95] tracking-[-0.02em] text-mist-100"
+            />
+          </div>
+
+          <AnimationWrapper variant="rise" stagger={0.12}>
+            <ul className="flex flex-col">
+              {PROBLEMS.map((problem, index) => (
+                <li
+                  key={problem.title}
+                  className="grid grid-cols-[auto_1fr] items-start gap-6 border-t border-ink-600 py-8"
                 >
-                  Read our manifesto
                   <span
                     aria-hidden="true"
-                    className="transition-transform duration-200 group-hover:translate-x-1"
+                    className="ghost-numeral text-[clamp(2.5rem,6vw,4.5rem)]"
                   >
-                    →
+                    {String(index + 1).padStart(2, '0')}
                   </span>
-                </a>
-              </div>
-            </AnimationWrapper>
-          </div>
-        </section>
+                  <div className="flex flex-col gap-3 pt-1">
+                    <h3 className="font-display text-h3 font-semibold text-mist-100">
+                      {problem.title}
+                    </h3>
+                    <p className="max-w-md font-sans text-body text-mist-300">
+                      {problem.detail}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </AnimationWrapper>
+        </div>
+      </section>
+
+      {/* 3 — Philosophy: full-bleed inverted brand-blue statement. */}
+      <section
+        aria-label="Philosophy"
+        className="bg-pulse-500 text-ink-900"
+      >
+        <div className="mx-auto w-full max-w-site px-6 py-[clamp(6rem,16vh,12rem)] sm:px-10">
+          <p className="font-mono text-mono-eyebrow uppercase tracking-[0.22em] text-ink-900/70">
+            Our philosophy
+          </p>
+          <AnimationWrapper variant="rise">
+            <SplitText
+              as="h2"
+              by="word"
+              text="Most software is built to ship. We build it to last."
+              className="mt-8 max-w-[18ch] font-display text-[clamp(2.5rem,7vw,6.5rem)] font-bold leading-[0.95] tracking-[-0.02em] text-ink-900"
+            />
+          </AnimationWrapper>
+          <AnimationWrapper variant="fade" delay={0.1}>
+            <p className="mt-10 max-w-xl font-sans text-body-l leading-relaxed text-ink-900/80">
+              Anything worth building is worth building to last. We make order
+              that holds — structured, tested, and maintainable — so the
+              products we ship keep working long after launch day.
+            </p>
+          </AnimationWrapper>
+        </div>
+      </section>
 
       {/* What we build — pinned horizontal-scroll capabilities showcase. */}
       <CapabilitiesShowcase capabilities={[...CAPABILITIES]} />
 
       {/* 4 — Portfolio preview: featured case studies only (Requirement 6.2). */}
       <FeaturedWork caseStudies={featuredCaseStudies} />
-
-      {/* 5 — Services: the five service cards. */}
-      <section
-        aria-label="Services"
-        className="section-glow mx-auto w-full max-w-site px-6 py-[clamp(6rem,14vh,11rem)] sm:px-10"
-      >
-        <SectionHeader eyebrow="What we do" title="Five ways we build" />
-        <AnimationWrapper variant="rise" stagger={0.08}>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {services.map((service, index) => (
-              <ServiceCard key={service.slug} service={service} index={index} />
-            ))}
-          </div>
-        </AnimationWrapper>
-      </section>
 
       {/* How we work — process band with a scroll-drawn progress line. */}
       <ProcessTimeline steps={PROCESS_STEPS} />
