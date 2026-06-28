@@ -125,11 +125,11 @@ const FRONT_SPECS: CardSpec[] = [
     height: 210,
     initPos: (W, H) => ({ x: W * 0.60, y: H + 230, rotation: 0, scale: 1 }),
     buildTl: (el, W, H) =>
-      gsap.timeline({ repeat: -1, delay: 22 })
+      gsap.timeline({ repeat: -1, delay: 10 })
         .set(el,  { x: W * 0.60,  y: H + 230,  rotation:  0, scale: 1.00 })
-        .to(el,   { x: W * 0.46,  y: H * 0.64, rotation: -6, scale: 1.00, duration: 16, ease: 'sine.inOut' })
-        .to(el,   { x: W * 0.33,  y: H * 0.34, rotation: 11, scale: 1.04, duration: 20, ease: 'sine.inOut' })
-        .to(el,   { x: W * 0.14,  y: -230,     rotation: -4, scale: 0.98, duration: 15, ease: 'sine.inOut' }),
+        .to(el,   { x: W * 0.46,  y: H * 0.64, rotation: -6, scale: 1.00, duration: 6,  ease: 'sine.inOut' })
+        .to(el,   { x: W * 0.33,  y: H * 0.34, rotation: 11, scale: 1.04, duration: 8,  ease: 'sine.inOut' })
+        .to(el,   { x: W * 0.14,  y: -230,     rotation: -4, scale: 0.98, duration: 6,  ease: 'sine.inOut' }),
   },
 ];
 
