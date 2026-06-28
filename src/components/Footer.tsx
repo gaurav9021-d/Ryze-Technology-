@@ -19,6 +19,9 @@ const SOCIAL_LABELS: Record<SocialLink['platform'], string> = {
   x: 'X',
   dribbble: 'Dribbble',
   email: 'Email',
+  instagram: 'Instagram',
+  facebook: 'Facebook',
+  whatsapp: 'WhatsApp',
 };
 
 function socialHref(link: SocialLink): string {
