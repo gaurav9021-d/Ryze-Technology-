@@ -35,6 +35,7 @@ export type ContactStatus = 'idle' | 'submitting' | 'success' | 'error';
 export interface ContactValues {
   name: string;
   email: string;
+  phone: string;
   company: string;
   projectType: string;
   timeline: string;
@@ -47,6 +48,7 @@ type ContactErrors = Partial<Record<keyof ContactValues, string>>;
 const EMPTY_VALUES: ContactValues = {
   name: '',
   email: '',
+  phone: '',
   company: '',
   projectType: '',
   timeline: '',
@@ -286,6 +288,25 @@ export function ContactForm(): JSX.Element {
               {errors.email}
             </p>
           ) : null}
+        </div>
+
+        {/* Phone (optional) */}
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="contact-phone"
+            className="font-mono text-mono-eyebrow uppercase tracking-widest text-mist-300"
+          >
+            Phone
+          </label>
+          <input
+            id="contact-phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            value={values.phone}
+            onChange={(e) => updateField('phone', e.target.value)}
+            className={fieldClasses(false)}
+          />
         </div>
 
         {/* Company (optional) */}
