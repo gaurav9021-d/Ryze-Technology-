@@ -1,177 +1,154 @@
 /**
- * HeroForeground — GSAP closed-orbit card system with variable speed.
+ * HeroForeground — Solar-system orbital card system.
  *
- * Each card follows a closed 4-point orbit that stays within the hero viewport.
- * Speed is deliberately variable:
- *   • Approaching the headline zone  → power2.out (decelerates)
- *   • Over the headline words        → linear, long duration (lingers)
- *   • Leaving the headline zone      → power2.in (accelerates away)
- *   • Return leg to orbit start      → power1.inOut (smooth)
+ * Three concentric elliptical orbits (A=large/slow, B=medium, C=small/fast)
+ * each carry two cards placed exactly 180° apart for perfect visual balance.
+ * All six cards orbit continuously around the "Design. Develop. Grow." headline.
  *
- * Word coverage (approximate, based on centred headline at ~5.2vw):
- *   "Design."  → x: W×0.15–0.39,  y: H×0.38–0.46
- *   "Develop." → x: W×0.39–0.63,  y: H×0.38–0.46
- *   "Grow."    → x: W×0.63–0.85,  y: H×0.38–0.46
+ * True 3D depth without any separate layer divs:
+ *   – Upper arc of orbit (card moving away from viewer) → z-index: 5  → BEHIND headline (z-10)
+ *   – Lower arc of orbit (card approaching viewer)      → z-index: 15 → IN FRONT of headline (z-10)
+ *   – z-index is switched only on threshold crossing to avoid per-frame style thrash
  *
- * Layer pairs per word:
- *   "Design."  → M1 behind  + F2 in front
- *   "Develop." → M3 behind  + F3 in front
- *   "Grow."    → M2 behind  + F1 in front
+ * Depth is further reinforced by scale: cards shrink at the back (0.90) and
+ * grow at the front (1.10), matching natural perspective.
+ *
+ * 36 waypoints per orbit approximates a smooth ellipse without MotionPathPlugin.
+ * Hidden below md (768 px) — mobile sees only the WebGL ambient layer.
  */
 import { useEffect, useRef } from 'react';
+import type { CSSProperties } from 'react';
 import gsap from 'gsap';
 import { heroMidCards, heroFrontCards } from '@data/heroCards';
 
 // ---------------------------------------------------------------------------
-// Types
+// Orbit ring definitions
 // ---------------------------------------------------------------------------
 
-interface CardSpec {
+interface Orbit { rxF: number; ryF: number; dur: number }
+
+const ORBITS: Orbit[] = [
+  { rxF: 0.42, ryF: 0.34, dur: 22 },  // A — large, slow   (22 s / rev)
+  { rxF: 0.28, ryF: 0.22, dur: 14 },  // B — medium         (14 s / rev)
+  { rxF: 0.16, ryF: 0.13, dur:  9 },  // C — small, fast    ( 9 s / rev)
+];
+
+// Headline centre (fraction of viewport)
+const CX_F = 0.50;
+const CY_F = 0.42;
+
+// Steps per full orbit — 36 gives a smooth 10°-per-segment polygon
+const STEPS = 36;
+
+// ---------------------------------------------------------------------------
+// Card manifest — 2 cards per orbit, 180° apart for even distribution
+// ---------------------------------------------------------------------------
+
+interface CardDef {
   src: string;
   alt: string;
-  width: number;
-  height: number;
-  initPos: (W: number, H: number) => gsap.TweenVars;
-  buildTl: (el: HTMLElement, W: number, H: number) => gsap.core.Timeline;
+  w: number;
+  h: number;
+  orbit: number;    // index into ORBITS
+  startDeg: number; // angle on the orbit at t = 0
+  tilt: number;     // fixed visual rotation (degrees)
+}
+
+const CARDS: CardDef[] = [
+  // ── Orbit A  (large ring, 22 s) ─────────────────────────────────────────
+  {
+    src: heroMidCards[1]!.src, alt: heroMidCards[1]!.alt,
+    w: 258, h: 194, orbit: 0, startDeg:   0, tilt: -6,
+  },
+  {
+    src: heroMidCards[0]!.src, alt: heroMidCards[0]!.alt,
+    w: 200, h: 200, orbit: 0, startDeg: 180, tilt:  8,
+  },
+  // ── Orbit B  (medium ring, 14 s) ────────────────────────────────────────
+  {
+    src: heroFrontCards[0]!.src, alt: heroFrontCards[0]!.alt,
+    w: 228, h: 228, orbit: 1, startDeg:  90, tilt: -8,
+  },
+  {
+    src: heroMidCards[2]!.src, alt: heroMidCards[2]!.alt,
+    w: 165, h: 220, orbit: 1, startDeg: 270, tilt:  7,
+  },
+  // ── Orbit C  (small ring, 9 s) ──────────────────────────────────────────
+  {
+    src: heroFrontCards[1]!.src, alt: heroFrontCards[1]!.alt,
+    w: 170, h: 227, orbit: 2, startDeg:  45, tilt: -10,
+  },
+  {
+    src: heroFrontCards[2]!.src, alt: heroFrontCards[2]!.alt,
+    w: 210, h: 210, orbit: 2, startDeg: 225, tilt:   5,
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Orbit engine
+// ---------------------------------------------------------------------------
+
+function launchOrbit(el: HTMLElement, def: CardDef, W: number, H: number): void {
+  const cx   = W * CX_F;
+  const cy   = H * CY_F;
+  const orb  = ORBITS[def.orbit]!;
+  const rx   = W * orb.rxF;
+  const ry   = H * orb.ryF;
+  const sDur = orb.dur / STEPS;
+
+  // ── Initial position ────────────────────────────────────────────────────
+  const startRad = (def.startDeg * Math.PI) / 180;
+  gsap.set(el, {
+    x:        cx + rx * Math.cos(startRad) - def.w / 2,
+    y:        cy + ry * Math.sin(startRad) - def.h / 2,
+    rotation: def.tilt,
+    scale:    1 + 0.10 * Math.sin(startRad),
+  });
+
+  // ── 36-waypoint orbital timeline ─────────────────────────────────────────
+  const tl = gsap.timeline({ repeat: -1 });
+
+  for (let i = 1; i <= STEPS; i++) {
+    const rad   = ((def.startDeg + (i / STEPS) * 360) * Math.PI) / 180;
+    const x     = cx + rx * Math.cos(rad) - def.w / 2;
+    const y     = cy + ry * Math.sin(rad) - def.h / 2;
+    // scale: 0.90 at top of orbit (back), 1.10 at bottom (front)
+    const scale = 1 + 0.10 * Math.sin(rad);
+
+    tl.to(el, { x, y, scale, duration: sDur, ease: 'none' });
+  }
+
+  // ── Dynamic z-index — only update on threshold crossing ─────────────────
+  // Upper arc (sin < 0, card moving away): z=5  → behind  headline (z-10)
+  // Lower arc (sin ≥ 0, card approaching): z=15 → in front of headline
+  let isFront: boolean | null = null;
+
+  tl.eventCallback('onUpdate', () => {
+    const cardCenterY = (gsap.getProperty(el, 'y') as number) + def.h / 2;
+    const nowFront    = cardCenterY >= cy;
+    if (nowFront !== isFront) {
+      isFront          = nowFront;
+      el.style.zIndex  = nowFront ? '15' : '5';
+    }
+  });
 }
 
 // ---------------------------------------------------------------------------
-// Mid-layer specs  (z = 5 → BEHIND headline)
+// Shared card shell style
 // ---------------------------------------------------------------------------
 
-const MID_SPECS: CardSpec[] = [
-  {
-    // dev-design (square) — orbits left side, lingers at "Design."
-    src: heroMidCards[0]!.src,
-    alt: heroMidCards[0]!.alt,
-    width: 200,
-    height: 200,
-    initPos: (W, H) => ({ x: W * 0.05, y: H * 0.70, rotation: 0, scale: 1 }),
-    buildTl: (el, W, H) =>
-      gsap.timeline({ repeat: -1, delay: 0 })
-        // Approach from lower-left → near "Design."
-        .to(el, { x: W * 0.10, y: H * 0.44, rotation:  5, scale: 1.00, duration: 2.5, ease: 'power2.out' })
-        // SLOW — linger over "Design." (behind text)
-        .to(el, { x: W * 0.28, y: H * 0.41, rotation:  8, scale: 1.03, duration: 5.5, ease: 'none' })
-        // Accelerate away to upper-left
-        .to(el, { x: W * 0.06, y: H * 0.20, rotation:  3, scale: 0.97, duration: 3.0, ease: 'power2.in' })
-        // Return to orbit start
-        .to(el, { x: W * 0.05, y: H * 0.70, rotation:  0, scale: 1.00, duration: 3.5, ease: 'power1.inOut' }),
-  },
-  {
-    // developers (landscape) — orbits right side, lingers at "Grow."
-    src: heroMidCards[1]!.src,
-    alt: heroMidCards[1]!.alt,
-    width: 258,
-    height: 194,
-    initPos: (W, H) => ({ x: W * 0.75, y: H * 0.74, rotation: 0, scale: 1 }),
-    buildTl: (el, W, H) =>
-      gsap.timeline({ repeat: -1, delay: 5 })
-        // Approach from lower-right → near "Grow."
-        .to(el, { x: W * 0.68, y: H * 0.44, rotation: -6, scale: 1.00, duration: 3.0, ease: 'power2.out' })
-        // SLOW — linger over "Grow." (behind text)
-        .to(el, { x: W * 0.72, y: H * 0.41, rotation: -9, scale: 1.03, duration: 5.5, ease: 'none' })
-        // Accelerate away to upper-right
-        .to(el, { x: W * 0.84, y: H * 0.18, rotation: -4, scale: 0.97, duration: 3.5, ease: 'power2.in' })
-        // Return to orbit start
-        .to(el, { x: W * 0.75, y: H * 0.74, rotation:  0, scale: 1.00, duration: 3.5, ease: 'power1.inOut' }),
-  },
-  {
-    // social-marketing (portrait) — orbits bottom-center, lingers at "Develop."
-    src: heroMidCards[2]!.src,
-    alt: heroMidCards[2]!.alt,
-    width: 165,
-    height: 220,
-    initPos: (W, H) => ({ x: W * 0.50, y: H * 0.80, rotation: 0, scale: 1 }),
-    buildTl: (el, W, H) =>
-      gsap.timeline({ repeat: -1, delay: 10 })
-        // Approach from bottom-center → near "Develop."
-        .to(el, { x: W * 0.56, y: H * 0.50, rotation:  6, scale: 1.00, duration: 2.5, ease: 'power2.out' })
-        // SLOW — linger over "Develop." (behind text)
-        .to(el, { x: W * 0.52, y: H * 0.40, rotation:  9, scale: 1.03, duration: 5.5, ease: 'none' })
-        // Accelerate away to lower-left
-        .to(el, { x: W * 0.34, y: H * 0.54, rotation:  4, scale: 0.97, duration: 3.0, ease: 'power2.in' })
-        // Return to orbit start
-        .to(el, { x: W * 0.50, y: H * 0.80, rotation:  0, scale: 1.00, duration: 3.5, ease: 'power1.inOut' }),
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Front-layer specs  (z = 20 → IN FRONT of headline)
-// ---------------------------------------------------------------------------
-
-const FRONT_SPECS: CardSpec[] = [
-  {
-    // strategic-ads (square) — orbits top-right, lingers in front of "Grow."
-    src: heroFrontCards[0]!.src,
-    alt: heroFrontCards[0]!.alt,
-    width: 228,
-    height: 228,
-    initPos: (W, H) => ({ x: W * 0.74, y: H * 0.10, rotation: 0, scale: 1 }),
-    buildTl: (el, W, H) =>
-      gsap.timeline({ repeat: -1, delay: 3 })
-        // Descend from top-right → front of "Grow."
-        .to(el, { x: W * 0.70, y: H * 0.36, rotation: -6, scale: 1.00, duration: 2.5, ease: 'power2.out' })
-        // SLOW — linger in front of "Grow."
-        .to(el, { x: W * 0.66, y: H * 0.41, rotation: -9, scale: 1.04, duration: 5.5, ease: 'none' })
-        // Accelerate away to right
-        .to(el, { x: W * 0.84, y: H * 0.28, rotation: -4, scale: 0.96, duration: 3.0, ease: 'power2.in' })
-        // Return to orbit start
-        .to(el, { x: W * 0.74, y: H * 0.10, rotation:  0, scale: 1.00, duration: 2.5, ease: 'power1.inOut' }),
-  },
-  {
-    // brand-glowup (portrait) — orbits left side, lingers in front of "Design."
-    src: heroFrontCards[1]!.src,
-    alt: heroFrontCards[1]!.alt,
-    width: 170,
-    height: 227,
-    initPos: (W, H) => ({ x: W * 0.04, y: H * 0.58, rotation: 0, scale: 1 }),
-    buildTl: (el, W, H) =>
-      gsap.timeline({ repeat: -1, delay: 8 })
-        // Approach from left → front of "Design."
-        .to(el, { x: W * 0.14, y: H * 0.42, rotation: -8, scale: 1.00, duration: 2.5, ease: 'power2.out' })
-        // SLOW — linger in front of "Design."
-        .to(el, { x: W * 0.20, y: H * 0.38, rotation: -11, scale: 1.04, duration: 5.5, ease: 'none' })
-        // Accelerate away to upper-left
-        .to(el, { x: W * 0.06, y: H * 0.22, rotation:  -5, scale: 0.96, duration: 3.0, ease: 'power2.in' })
-        // Return to orbit start
-        .to(el, { x: W * 0.04, y: H * 0.58, rotation:   0, scale: 1.00, duration: 3.5, ease: 'power1.inOut' }),
-  },
-  {
-    // stopwatch (square) — orbits bottom-center, lingers in front of "Develop."
-    src: heroFrontCards[2]!.src,
-    alt: heroFrontCards[2]!.alt,
-    width: 210,
-    height: 210,
-    initPos: (W, H) => ({ x: W * 0.42, y: H * 0.78, rotation: 0, scale: 1 }),
-    buildTl: (el, W, H) =>
-      gsap.timeline({ repeat: -1, delay: 14 })
-        // Rise from bottom-center → front of "Develop."
-        .to(el, { x: W * 0.40, y: H * 0.50, rotation:  7, scale: 1.00, duration: 2.5, ease: 'power2.out' })
-        // SLOW — linger in front of "Develop."
-        .to(el, { x: W * 0.38, y: H * 0.39, rotation: 10, scale: 1.04, duration: 5.5, ease: 'none' })
-        // Accelerate away to lower-right
-        .to(el, { x: W * 0.56, y: H * 0.60, rotation:  4, scale: 0.96, duration: 3.0, ease: 'power2.in' })
-        // Return to orbit start
-        .to(el, { x: W * 0.42, y: H * 0.78, rotation:  0, scale: 1.00, duration: 3.5, ease: 'power1.inOut' }),
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Shared card style
-// ---------------------------------------------------------------------------
-
-const cardStyle = (w: number, h: number): React.CSSProperties => ({
-  position: 'absolute',
-  left: 0,
-  top: 0,
-  width: w,
-  height: h,
-  borderRadius: 14,
-  overflow: 'hidden',
-  border: '1px solid rgba(255,255,255,0.18)',
-  boxShadow: '4px -5px 40px rgba(0,0,0,0.52)',
-  willChange: 'transform',
+const shellStyle = (w: number, h: number): CSSProperties => ({
+  position:      'absolute',
+  left:          0,
+  top:           0,
+  width:         w,
+  height:        h,
+  zIndex:        5,          // behind headline until onUpdate promotes it
+  borderRadius:  14,
+  overflow:      'hidden',
+  border:        '1px solid rgba(255,255,255,0.18)',
+  boxShadow:     '6px -4px 44px rgba(0,0,0,0.54)',
+  willChange:    'transform',
   pointerEvents: 'none',
 });
 
@@ -180,8 +157,7 @@ const cardStyle = (w: number, h: number): React.CSSProperties => ({
 // ---------------------------------------------------------------------------
 
 export function HeroForeground(): JSX.Element {
-  const midRefs   = useRef<(HTMLDivElement | null)[]>([]);
-  const frontRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -190,18 +166,13 @@ export function HeroForeground(): JSX.Element {
     const W = window.innerWidth;
     const H = window.innerHeight;
 
+    // gsap.context() captures every tween/timeline created inside so
+    // ctx.revert() cleanly kills all animations on unmount.
     const ctx = gsap.context(() => {
-      MID_SPECS.forEach((spec, i) => {
-        const el = midRefs.current[i];
+      CARDS.forEach((def, i) => {
+        const el = refs.current[i];
         if (!el) return;
-        gsap.set(el, spec.initPos(W, H));
-        spec.buildTl(el, W, H);
-      });
-      FRONT_SPECS.forEach((spec, i) => {
-        const el = frontRefs.current[i];
-        if (!el) return;
-        gsap.set(el, spec.initPos(W, H));
-        spec.buildTl(el, W, H);
+        launchOrbit(el, def, W, H);
       });
     });
 
@@ -209,50 +180,36 @@ export function HeroForeground(): JSX.Element {
   }, []);
 
   return (
-    <>
-      {/* Mid layer — orbits BEHIND the z-10 headline */}
-      <div
-        className="pointer-events-none absolute inset-0 hidden md:block"
-        style={{ zIndex: 5 }}
-        aria-hidden="true"
-      >
-        {MID_SPECS.map((spec, i) => (
-          <div
-            key={i}
-            ref={(el) => { midRefs.current[i] = el; }}
-            style={cardStyle(spec.width, spec.height)}
-          >
-            <img
-              src={spec.src}
-              alt={spec.alt}
-              draggable={false}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', userSelect: 'none' }}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* Front layer — orbits IN FRONT of the z-10 headline */}
-      <div
-        className="pointer-events-none absolute inset-0 hidden md:block"
-        style={{ zIndex: 20 }}
-        aria-hidden="true"
-      >
-        {FRONT_SPECS.map((spec, i) => (
-          <div
-            key={i}
-            ref={(el) => { frontRefs.current[i] = el; }}
-            style={cardStyle(spec.width, spec.height)}
-          >
-            <img
-              src={spec.src}
-              alt={spec.alt}
-              draggable={false}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', userSelect: 'none' }}
-            />
-          </div>
-        ))}
-      </div>
-    </>
+    /*
+     * NO z-index on this wrapper → z-index: auto → does NOT create a new
+     * stacking context.  Each card's inline z-index (5 or 15) is therefore
+     * evaluated directly in the section's stacking context, placing it below
+     * or above the z-10 headline content div as needed.
+     */
+    <div
+      className="pointer-events-none absolute inset-0 hidden md:block"
+      aria-hidden="true"
+    >
+      {CARDS.map((def, i) => (
+        <div
+          key={i}
+          ref={(el) => { refs.current[i] = el; }}
+          style={shellStyle(def.w, def.h)}
+        >
+          <img
+            src={def.src}
+            alt={def.alt}
+            draggable={false}
+            style={{
+              width:      '100%',
+              height:     '100%',
+              objectFit:  'cover',
+              display:    'block',
+              userSelect: 'none',
+            }}
+          />
+        </div>
+      ))}
+    </div>
   );
 }
