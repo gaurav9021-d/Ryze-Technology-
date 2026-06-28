@@ -39,7 +39,7 @@ import { AnimatedCounter } from '@components/AnimatedCounter';
 import { AnimationWrapper } from '@components/AnimationWrapper';
 import { FeaturedWork } from '@components/FeaturedWork';
 import { ProcessTimeline } from '@components/ProcessTimeline';
-import { CapabilitiesShowcase } from '@components/CapabilitiesShowcase';
+import { CapabilitiesShowcase, type Capability } from '@components/CapabilitiesShowcase';
 import { CTA } from '@components/CTA';
 import { Hero } from '@components/Hero';
 import { MarqueeText } from '@components/MarqueeText';
@@ -124,6 +124,26 @@ const PROBLEMS: ReadonlyArray<{ title: string; detail: string }> = [
 
 /** "Why Us" metrics — sourced from the shared studio metrics (single source of truth). */
 const METRICS = studioMetrics.slice(0, 3);
+
+/**
+ * The disciplines shown in the pinned "What we build" showcase: the four
+ * software services plus the studio's social media marketing offering.
+ */
+const CAPABILITIES: ReadonlyArray<Capability> = [
+  ...services.map((s) => ({
+    kind: s.slug as Capability['kind'],
+    name: s.name,
+    tagline: s.tagline,
+    techStack: s.techStack,
+  })),
+  {
+    kind: 'social-media-marketing',
+    name: 'Social Media Marketing',
+    tagline:
+      'Content, campaigns, and community management that grow your brand and turn attention into customers.',
+    techStack: ['Strategy', 'Content', 'Campaigns', 'Analytics'],
+  },
+];
 
 /** What sets the studio apart — the differentiator list under the metrics. */
 const DIFFERENTIATORS: ReadonlyArray<string> = [
@@ -239,7 +259,7 @@ export function HomePage(): JSX.Element {
       </section>
 
       {/* What we build — pinned horizontal-scroll capabilities showcase. */}
-      <CapabilitiesShowcase services={services} />
+      <CapabilitiesShowcase capabilities={[...CAPABILITIES]} />
 
       {/* 4 — Portfolio preview: featured case studies only (Requirement 6.2). */}
       <FeaturedWork caseStudies={featuredCaseStudies} />
