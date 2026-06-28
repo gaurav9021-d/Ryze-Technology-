@@ -21,11 +21,12 @@ export const navItems: NavItem[] = [
   {
     label: 'Services',
     children: [
-      { label: 'Websites & Web Apps', path: '/services/websites', description: 'Marketing sites and product web apps' },
-      { label: 'Mobile Apps', path: '/services/mobile-apps', description: 'Native-quality iOS and Android experiences' },
-      { label: 'Desktop', path: '/services/desktop', description: 'Cross-platform desktop applications' },
-      { label: 'Business Systems', path: '/services/business-systems', description: 'Internal tools and operational platforms' },
-      { label: 'All Services', path: '/services', description: 'Overview of how we work and what we offer' },
+      { label: 'Development', path: '/services/development', description: 'Web & mobile apps, websites, e-commerce, dashboards, APIs' },
+      { label: 'Design', path: '/services/design', description: 'UI/UX, branding, prototyping, redesigns, design systems' },
+      { label: 'Digital Marketing', path: '/services/digital-marketing', description: 'SEO, social, paid ads, content, email & WhatsApp' },
+      { label: 'Sales & Strategy', path: '/services/sales-strategy', description: 'Lead gen, funnels, CRM setup, business consulting' },
+      { label: 'Maintenance & Support', path: '/services/maintenance-support', description: 'Maintenance plans, support, hosting, optimization, AMC' },
+      { label: 'All Services', path: '/services', description: 'Overview of how we work and everything we offer' },
     ],
   },
   {
@@ -59,10 +60,11 @@ export const footerNav: FooterNavGroup[] = [
   {
     title: 'Services',
     links: [
-      { label: 'Websites & Web Apps', path: '/services/websites' },
-      { label: 'Mobile Apps', path: '/services/mobile-apps' },
-      { label: 'Desktop', path: '/services/desktop' },
-      { label: 'Business Systems', path: '/services/business-systems' },
+      { label: 'Development', path: '/services/development' },
+      { label: 'Design', path: '/services/design' },
+      { label: 'Digital Marketing', path: '/services/digital-marketing' },
+      { label: 'Sales & Strategy', path: '/services/sales-strategy' },
+      { label: 'Maintenance & Support', path: '/services/maintenance-support' },
       { label: 'All Services', path: '/services' },
     ],
   },

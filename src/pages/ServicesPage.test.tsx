@@ -59,15 +59,16 @@ describe('ServicesPage', () => {
     expect(h1.tagName).toBe('H1');
   });
 
-  it('renders all four service entities as cards with Learn More links (Req 9.1)', () => {
+  it('renders all five service entities as cards with Learn More links (Req 9.1)', () => {
     renderPage();
 
-    expect(services).toHaveLength(4);
+    expect(services).toHaveLength(5);
+    const servicesRegion = screen.getByRole('region', { name: 'Services' });
     for (const service of services) {
       expect(
-        screen.getByRole('heading', { level: 3, name: service.name }),
+        within(servicesRegion).getByRole('heading', { level: 3, name: service.name }),
       ).toBeInTheDocument();
-      const link = screen.getByRole('link', {
+      const link = within(servicesRegion).getByRole('link', {
         name: `Learn more about ${service.name}`,
       });
       expect(link).toHaveAttribute('href', `/services/${service.slug}`);
