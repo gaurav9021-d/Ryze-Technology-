@@ -163,15 +163,6 @@ export function Hero({ headline }: HeroProps): JSX.Element {
           {SUBTITLE}
         </p>
 
-        {/* CTA — rounded pill button. Uses real <a> for crawlability + a11y. */}
-        <div className="relative mt-10">
-          <a
-            href="/contact"
-            className="inline-block rounded-full border border-white/20 bg-white/10 px-8 py-3 font-sans text-sm font-semibold tracking-wide text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/60"
-          >
-            Get in touch
-          </a>
-        </div>
       </div>
 
       {/* Scroll affordance pinned to the bottom. */}
