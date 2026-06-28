@@ -64,9 +64,9 @@ const MID_SPECS: CardSpec[] = [
     buildTl: (el, W, H) =>
       gsap.timeline({ repeat: -1, delay: 4 })
         .set(el,  { x: W + 280,  y: H * 0.12, rotation:  0, scale: 1.00 })
-        .to(el,   { x: W * 0.72, y: H * 0.20, rotation: -8, scale: 1.03, duration: 8,  ease: 'none' })
-        .to(el,   { x: W * 0.36, y: H * 0.44, rotation:  6, scale: 0.97, duration: 9,  ease: 'none' })
-        .to(el,   { x: -280,     y: H * 0.60, rotation: -4, scale: 1.00, duration: 8,  ease: 'none' }),
+        .to(el,   { x: W * 0.72, y: H * 0.20, rotation: -8, scale: 1.03, duration: 5,  ease: 'none' })
+        .to(el,   { x: W * 0.36, y: H * 0.44, rotation:  6, scale: 0.97, duration: 5,  ease: 'none' })
+        .to(el,   { x: -280,     y: H * 0.60, rotation: -4, scale: 1.00, duration: 5,  ease: 'none' }),
   },
   {
     // social-marketing (portrait) — enters top, exits bottom
