@@ -186,13 +186,13 @@ function DesktopDropdown({ item }: { item: NavItem & { children: NavChild[] } })
             {item.children.map((child, index) => (
               <li key={`${child.label}-${child.path}`} role="none">
                 {index > 0 ? (
-                  <div aria-hidden="true" className="mx-3 h-px bg-ink-600/70" />
+                  <div aria-hidden="true" className="mx-3 h-px bg-mist-100/20" />
                 ) : null}
                 <Link
                   role="menuitem"
                   to={child.path}
                   data-cursor="link"
-                  className="block rounded-xl px-4 py-3 font-mono text-sm tracking-wide text-mist-100 transition-colors duration-150 hover:bg-ink-700 hover:text-pulse-500 focus-visible:bg-ink-700 focus-visible:text-pulse-500"
+                  className="block rounded-lg px-4 py-2 font-mono text-sm tracking-wide text-mist-100 transition-colors duration-150 hover:bg-ink-700 hover:text-pulse-500 focus-visible:bg-ink-700 focus-visible:text-pulse-500"
                   onClick={() => setOpen(false)}
                 >
                   {child.label}
