@@ -25,17 +25,15 @@ export interface HeroCard {
   orientation: HeroCardOrientation;
 }
 
-/** The nine showcase images for the floating-cards hero. */
-export const heroCards: HeroCard[] = [
+/**
+ * Back cards — rendered in the WebGL 3D orbit scene behind the headline.
+ * Six unique images; the scene never repeats any of them.
+ */
+export const heroBackCards: HeroCard[] = [
   {
     src: '/images/hero/search-ai.jpg',
     alt: 'AI-powered search interface with hands on laptop',
     orientation: 'landscape',
-  },
-  {
-    src: '/images/hero/strategic-ads.webp',
-    alt: 'Strategic ad campaigns — chess pieces symbolising targeted marketing',
-    orientation: 'square',
   },
   {
     src: '/images/hero/social-marketing.jpg',
@@ -53,11 +51,6 @@ export const heroCards: HeroCard[] = [
     orientation: 'landscape',
   },
   {
-    src: '/images/hero/brand-glowup.jpg',
-    alt: 'Brand glow-up — "Your Brand Called. It wants a Glow up" poster',
-    orientation: 'portrait',
-  },
-  {
     src: '/images/hero/developers.jpg',
     alt: 'Developers — bold typographic poster with retro computer scene',
     orientation: 'landscape',
@@ -67,9 +60,29 @@ export const heroCards: HeroCard[] = [
     alt: 'Social media collage — dark-toned hands across multiple devices',
     orientation: 'portrait',
   },
+];
+
+/**
+ * Front cards — rendered as DOM elements in front of the headline (z-20).
+ * Three unique images; each floats with its own Framer Motion animation.
+ */
+export const heroFrontCards: HeroCard[] = [
   {
-    src: '/images/hero/team-collab.webp',
-    alt: 'Team collaboration — birds-eye view of a meeting around a table',
+    src: '/images/hero/strategic-ads.webp',
+    alt: 'Strategic ad campaigns — chess pieces symbolising targeted marketing',
+    orientation: 'square',
+  },
+  {
+    src: '/images/hero/brand-glowup.jpg',
+    alt: 'Brand glow-up — "Your Brand Called. It wants a Glow up" poster',
+    orientation: 'portrait',
+  },
+  {
+    src: '/images/hero/stopwatch-collab.png',
+    alt: 'Time management collaboration — team around a pink stopwatch from above',
     orientation: 'square',
   },
 ];
+
+/** Full array kept for backward compatibility with any other consumers. */
+export const heroCards: HeroCard[] = [...heroBackCards, ...heroFrontCards];
