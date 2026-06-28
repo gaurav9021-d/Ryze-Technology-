@@ -38,7 +38,7 @@ const SOCIAL_LABELS: Record<SocialLink['platform'], string> = {
 
 /** Brand glyphs per social platform, drawn with `currentColor`. */
 function SocialGlyph({ platform }: { platform: SocialLink['platform'] }): JSX.Element {
-  const box = { width: 20, height: 20, viewBox: '0 0 24 24', 'aria-hidden': true } as const;
+  const box = { width: 16, height: 16, viewBox: '0 0 24 24', 'aria-hidden': true } as const;
   switch (platform) {
     case 'instagram':
       return (
@@ -136,7 +136,7 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-700">
               Follow us
             </p>
-            <ul className="flex flex-wrap gap-3" aria-label="Social media">
+            <ul className="flex flex-nowrap items-center gap-2" aria-label="Social media">
               {metadata.social.map((link) => (
                 <li key={link.platform}>
                   <a
@@ -145,7 +145,7 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
                     rel="noopener noreferrer"
                     aria-label={SOCIAL_LABELS[link.platform]}
                     title={SOCIAL_LABELS[link.platform]}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-600/40 text-ink-700 transition-colors duration-200 hover:border-pulse-500 hover:bg-pulse-500 hover:text-ink-900 focus-visible:border-pulse-500 focus-visible:bg-pulse-500 focus-visible:text-ink-900"
+                    className="flex h-8 w-8 items-center justify-center rounded-full border border-ink-600/40 text-ink-700 transition-colors duration-200 hover:border-pulse-500 hover:bg-pulse-500 hover:text-ink-900 focus-visible:border-pulse-500 focus-visible:bg-pulse-500 focus-visible:text-ink-900"
                   >
                     <SocialGlyph platform={link.platform} />
                   </a>
