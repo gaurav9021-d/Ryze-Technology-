@@ -33,6 +33,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { navItems as defaultNavItems } from '@data/navigation';
 import type { NavChild, NavItem } from '@app-types';
@@ -172,46 +173,47 @@ function DesktopDropdown({ item }: { item: NavItem & { children: NavChild[] } })
         </span>
       </button>
 
-      {open ? (
-        // Wrapper carries a transparent top padding that BRIDGES the gap to the
-        // button, so moving the cursor from the button to the panel never
-        // leaves the hover container (fixes the "closes before click" bug).
-        <div className="absolute left-0 top-full z-[70] pt-3">
-          <ul
-            id={menuId}
-            role="menu"
-            aria-label={item.label}
-            className="flex w-[min(92vw,22rem)] flex-col rounded-xl border border-ink-600 bg-white p-2.5 shadow-[0_28px_70px_-18px_rgba(10,10,8,0.45)] ring-1 ring-black/5"
-          >
-            {item.children.map((child, index) => (
-              <li key={`${child.label}-${child.path}`} role="none">
-                {index > 0 ? (
-                  <div
-                    aria-hidden="true"
-                    className="mx-2 h-px bg-gradient-to-r from-transparent via-black/40 to-transparent"
-                  />
-                ) : null}
-                <Link
-                  role="menuitem"
-                  to={child.path}
-                  data-cursor="link"
-                  className="flex h-full flex-col gap-1 rounded-lg border border-transparent px-3.5 py-3 transition-colors hover:border-ink-600 hover:bg-ink-700 focus-visible:border-ink-600 focus-visible:bg-ink-700"
-                  onClick={() => setOpen(false)}
-                >
-                  <span className="font-mono text-sm font-medium tracking-wide text-mist-100">
-                    {child.label}
-                  </span>
-                  {child.description !== undefined ? (
-                    <span className="block text-xs leading-snug text-mist-300">
-                      {child.description}
-                    </span>
+      <AnimatePresence>
+        {open ? (
+          // Wrapper carries a transparent top padding that BRIDGES the gap to the
+          // button, so moving the cursor from the button to the panel never
+          // leaves the hover container (fixes the "closes before click" bug).
+          <div className="absolute left-0 top-full z-[70] pt-3">
+            <motion.ul
+              id={menuId}
+              role="menu"
+              aria-label={item.label}
+              initial={{ opacity: 0, y: 8, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.96 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="flex w-[min(92vw,17.5rem)] flex-col rounded-xl border border-ink-600 bg-white p-2 shadow-[0_28px_70px_-18px_rgba(10,10,8,0.45)] ring-1 ring-black/5"
+            >
+              {item.children.map((child, index) => (
+                <li key={`${child.label}-${child.path}`} role="none">
+                  {index > 0 ? (
+                    <div
+                      aria-hidden="true"
+                      className="mx-2 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent"
+                    />
                   ) : null}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+                  <Link
+                    role="menuitem"
+                    to={child.path}
+                    data-cursor="link"
+                    className="flex h-full flex-col gap-1 rounded-lg border border-transparent px-3.5 py-2.5 transition-colors hover:border-ink-600 hover:bg-ink-700 focus-visible:border-ink-600 focus-visible:bg-ink-700"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span className="font-mono text-sm font-medium tracking-wide text-mist-100">
+                      {child.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </motion.ul>
+          </div>
+        ) : null}
+      </AnimatePresence>
     </li>
   );
 }

@@ -65,7 +65,7 @@ describe('ServicesPage', () => {
     expect(services).toHaveLength(5);
     for (const service of services) {
       expect(
-        screen.getByRole('heading', { level: 3, name: service.name }),
+        screen.getAllByRole('heading', { level: 3, name: service.name })[0],
       ).toBeInTheDocument();
       const link = screen.getByRole('link', {
         name: `Learn more about ${service.name}`,
