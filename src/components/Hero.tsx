@@ -134,7 +134,7 @@ export function Hero({ headline }: HeroProps): JSX.Element {
       </div>
 
       {/* Hero content — always DOM, always sharp, always on top of canvas. */}
-      <div className="relative z-10 mx-auto w-full max-w-site px-6 pb-28 pt-32 text-center sm:px-10">
+      <div className="relative z-10 mx-auto w-full max-w-site px-6 pb-16 pt-32 text-center sm:px-10">
         {/*
          * Center vignette behind the text block — a subtle dark oval so the
          * headline reads over any card that drifts behind it.
