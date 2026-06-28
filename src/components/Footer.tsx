@@ -73,6 +73,14 @@ export function Footer({ metadata = siteMetadata }: FooterProps = {}): JSX.Eleme
             >
               {metadata.contactEmail}
             </a>
+            {metadata.contactPhone !== undefined ? (
+              <a
+                href={`tel:${metadata.contactPhone}`}
+                className="font-mono text-sm text-ink-900 transition-colors hover:text-pulse-400"
+              >
+                +91 {metadata.contactPhone}
+              </a>
+            ) : null}
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-mist-300">
               Nagpur, India · Worldwide
             </p>

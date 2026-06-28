@@ -34,7 +34,6 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { CustomCursor } from '@components/CustomCursor';
 import { Navigation } from '@components/Navigation';
 import { Footer } from '@components/Footer';
 import { PageTransition } from '@components/PageTransition';
@@ -188,7 +187,6 @@ export function AppLayout(): JSX.Element {
 
   return (
     <>
-      <CustomCursor />
       <Navigation transparentUntilScroll />
       {/*
         No wrapping <main> here: every routed page renders its own single
