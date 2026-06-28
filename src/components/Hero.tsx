@@ -168,6 +168,9 @@ export function Hero({ headline }: HeroProps): JSX.Element {
 
       </div>
 
+      {/* Three foreground cards that float IN FRONT of the headline. */}
+      <HeroForeground />
+
       {/* Scroll affordance pinned to the bottom. */}
       <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
         <ScrollIndicator />
