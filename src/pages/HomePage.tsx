@@ -44,7 +44,6 @@ import { CTA } from '@components/CTA';
 import { Hero } from '@components/Hero';
 import { MarqueeText } from '@components/MarqueeText';
 import { SectionHeader } from '@components/SectionHeader';
-import { ServiceCard } from '@components/ServiceCard';
 import { SplitText } from '@components/SplitText';
 import { TeamCard } from '@components/TeamCard';
 import { SEOHead } from '@components/SEOHead';
@@ -263,21 +262,6 @@ export function HomePage(): JSX.Element {
 
       {/* 4 — Portfolio preview: featured case studies only (Requirement 6.2). */}
       <FeaturedWork caseStudies={featuredCaseStudies} />
-
-      {/* 5 — Services: the four service cards. */}
-      <section
-        aria-label="Services"
-        className="mx-auto w-full max-w-site px-6 py-[clamp(6rem,14vh,11rem)] sm:px-10"
-      >
-        <SectionHeader eyebrow="What we do" title="Four ways we build" />
-        <AnimationWrapper variant="rise" stagger={0.08}>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((service, index) => (
-              <ServiceCard key={service.slug} service={service} index={index} />
-            ))}
-          </div>
-        </AnimationWrapper>
-      </section>
 
       {/* How we work — process band with a scroll-drawn progress line. */}
       <ProcessTimeline steps={PROCESS_STEPS} />
